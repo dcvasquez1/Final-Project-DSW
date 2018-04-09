@@ -79,7 +79,7 @@ def renderScoreboard():
 def renderClientProfile():
     return render_template('clientProfile.html')
 
-@app.route('/clientProfile')
+@app.route('/gamePage')
 def renderGamePage():
     return render_template('gamePage.html')
 	
