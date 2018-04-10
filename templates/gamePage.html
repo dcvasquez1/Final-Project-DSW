@@ -5,6 +5,11 @@
 {% block content %}
 	<h1>Type Quickly!</h1>
 	
-	<p>Placeholder text</p>
+	<form action='/response' method = "post">
+		Copy the text from above.<br>
+		<input type="text" name="return-text">
+		<br><br>
+		<input type="submit">
+	</form>
 
 {% endblock %}
