@@ -4,6 +4,7 @@ from flask import render_template
 
 import pprint
 import os
+import time
 
 # This code originally from https://github.com/lepture/flask-oauthlib/blob/master/example/github.py
 # Edited by P. Conrad for SPIS 2016 to add getting Client Id and Secret from
@@ -82,6 +83,31 @@ def renderClientProfile():
 @app.route('/gamePage')
 def renderGamePage():
     return render_template('gamePage.html')
+
+@app.route('/countdown3')
+def countdown3():
+	return Markup('<p>Game Starting in: 3 seconds</p>')
+
+@app.route('/countdown2')
+def countdown2():
+	now = time.time()
+	endTime = now + 1
+	if time.time() > endTime:
+		return Markup('<p>Game Starting in: 2 seconds</p>')
+
+@app.route('/countdown1')
+def countdown1():
+	now = time.time()
+	endTime = now + 2
+	if time.time() > endTime:
+		return Markup('<p>Game Starting in: 1 second</p>')
+
+@app.route('/startGame')
+def startGame():
+	now = time.time()
+	endTime = now + 3
+	if time.time() > endTime:
+		return Markup('<p>Go!</p>')
 	
 #the tokengetter is automatically called to check who is logged in
 @github.tokengetter
