@@ -108,6 +108,10 @@ def startGame():
 	endTime = now + 3
 	if time.time() > endTime:
 		return Markup('<p>Go!</p>')
+
+@app.route('/response')
+def textComplete():
+	return Markup('<p>Recieved Message</p>')
 	
 #the tokengetter is automatically called to check who is logged in
 @github.tokengetter
