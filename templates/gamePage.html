@@ -6,7 +6,7 @@
 
 	<script>
 		$(document).ready(function(){
-			$("button").click(function()({
+			$("#startButton").click(function()({
 				$("#div1").load("/countdown3");
 				//$("#div1").load("/countdown2");
 				//$("#div1").load("/countdown1");
@@ -21,7 +21,7 @@
 		<p>Press the button to begin the race</p>
 	</div>
 	
-	<button>Start Game!</button>
+	<button id="startButton">Start Game!</button>
 
 	<form action='/response' method = "post">
 		Copy the text from above.<br>
