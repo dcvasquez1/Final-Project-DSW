@@ -5,19 +5,24 @@
 {% block content %}
 
 	<script>
+		function startGame() {
+  			var introText;
+  			introText = document.getElementById("introText");
+ 			introText.innerHTML = "&#xf244;";
+			setTimeout(function () { introText.innerHTML = "Game Starting in: 3 seconds" }, 1000);
+			setTimeout(function () { introText.innerHTML = "Game Starting in: 2 seconds" }, 2000);
+			setTimeout(function () { introText.innerHTML = "Game Starting in: 1 second" }, 3000);
+			setTimeout(function () { introText.innerHTML = "Go!" }, 4000);
+		}
+		
 		$(document).ready(function(){
-			$("#startButton").click(function()({
-				$("#div1").load("/countdown3");
-				//$("#div1").load("/countdown2");
-				//$("#div1").load("/countdown1");
-				//$("#div1").load("/startGame");
-			}););
+			$("#startButton").click(startGame());
 		});
 	</script>
 
 	<h1>Type Quickly!</h1>
 		
-	<div id="div1">
+	<div id="introText">
 		<p>Press the button to begin the race</p>
 	</div>
 	
