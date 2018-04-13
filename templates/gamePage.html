@@ -8,10 +8,15 @@
 		function startGame() {
   			var introText;
   			introText = document.getElementById("introText");
+			introText.innerHTML = "Starting Game..."
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 3 seconds" }, 1000);
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 2 seconds" }, 2000);
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 1 second" }, 3000);
 			setTimeout(function () { introText.innerHTML = "Go!" }, 4000);
+			setTimeout(function () { 
+				introText.innerHTML = ""; 
+				document.getElementById('startButton').style.display = none;
+				}, 5000);
 		}
 	</script>
 
