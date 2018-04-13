@@ -9,13 +9,11 @@
   			var introText;
   			introText = document.getElementById("introText");
 			introText.innerHTML = "Starting Game..."
-			var startButton = document.getElementById("startButton");
-			startButton.style.display = none;
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 3 seconds" }, 1000);
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 2 seconds" }, 2000);
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 1 second" }, 3000);
 			setTimeout(function () { introText.innerHTML = "Go!" }, 4000);
-			setTimeout(function () { introText.innerHTML = "" }, 5000);
+			setTimeout(function () { introText.style.display = none }, 5000);
 		}
 	</script>
 
@@ -23,10 +21,10 @@
 		
 	<div id="introText">
 		<p>Press the button to begin the race</p>
+		<button id="startButton" onclick="startGame()">Start Game!</button>
 	</div>
 	
-	<button id="startButton" onclick="startGame()">Start Game!</button>
-
+	
 	<form action='/response' method = "post">
 		Copy the text from above.<br>
 		<input type="text" name="return-text">
