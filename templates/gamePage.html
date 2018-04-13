@@ -13,10 +13,6 @@
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 1 second" }, 3000);
 			setTimeout(function () { introText.innerHTML = "Go!" }, 4000);
 		}
-		
-		$(document).ready(function(){
-			$("#startButton").click(startGame());
-		});
 	</script>
 
 	<h1>Type Quickly!</h1>
@@ -25,7 +21,7 @@
 		<p>Press the button to begin the race</p>
 	</div>
 	
-	<button id="startButton">Start Game!</button>
+	<button id="startButton" onclick="startGame()">Start Game!</button>
 
 	<form action='/response' method = "post">
 		Copy the text from above.<br>
