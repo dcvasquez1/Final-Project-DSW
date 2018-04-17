@@ -86,7 +86,7 @@ def renderGamePage():
 
 @app.route('/response')
 def textComplete():
-	return render_template('gamePage.html')
+	return render_template('typeResponse.html')
 	
 #the tokengetter is automatically called to check who is logged in
 @github.tokengetter
