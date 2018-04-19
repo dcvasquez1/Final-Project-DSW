@@ -44,7 +44,7 @@ def inject_logged_in():
 def home():
     return render_template('home.html')
 
-@app.route('/posted', methods=['POST'])
+@app.route('/postedScore', methods=['POST'])
 def postScore():
     try:
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
@@ -55,18 +55,18 @@ def postScore():
 	score = request.form['score']
 	clientData.insert_one({'username': username, 'score': score})
 	
-        return render_template('home.html', past_posts=posts_to_html())
+        return render_template('home.html', user_scores=scores_to_html())
     except Exception as e:
-        return render_template('home.html', past_posts=Markup('<p>' + str(e) + '</p>'))
+        return render_template('home.html', user_scores=Markup('<p>' + str(e) + '</p>'))
 
 def scores_to_html():
     try:
-        tableString = '<table id="postsTable" cellpadding="5"> <tr> <th> Username </th> <th> High Score </th> </tr>'
+        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th> Username </th> <th> High Score </th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
     	database = client["dsw-final-project"]
     	clientData = database["clientData"]
         
-        for i in posts.find():
+        for i in clientData.find():
             tableString += " <tr> <td>" + i['username'] + ": </td>"
             tableString += " <td>" + i['score'] + "</td>"
             tableString += ' </tr> '
