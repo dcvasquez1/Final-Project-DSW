@@ -44,6 +44,37 @@ def inject_logged_in():
 def home():
     return render_template('home.html')
 
+@app.route('/posted', methods=['POST'])
+def postScore():
+    try:
+        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+    	database = client["dsw-final-project"]
+    	clientData = database["clientData"]
+	
+	username = session['user_data']['login']
+	score = request.form['score']
+	clientData.insert_one({'username': username, 'score': score})
+	
+        return render_template('home.html', past_posts=posts_to_html())
+    except Exception as e:
+        return render_template('home.html', past_posts=Markup('<p>' + str(e) + '</p>'))
+
+def scores_to_html():
+    try:
+        tableString = '<table id="postsTable" cellpadding="5"> <tr> <th> Username </th> <th> High Score </th> </tr>'
+        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+    	database = client["dsw-final-project"]
+    	clientData = database["clientData"]
+        
+        for i in posts.find():
+            tableString += " <tr> <td>" + i['username'] + ": </td>"
+            tableString += " <td>" + i['score'] + "</td>"
+            tableString += ' </tr> '
+        tableString += " </table>"
+        table = Markup(tableString)
+        return table
+    except Exception as e:
+   	return Markup('<p>' + str(e) + '</p>')
 
 #redirect to HitHub'[s OAuth page and confirm the callback URL
 @app.route('/login')
