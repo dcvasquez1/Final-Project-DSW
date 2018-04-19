@@ -1,10 +1,12 @@
-from flask import Flask, redirect, url_for, session, request, jsonify, flash
+from flask import Flask, redirect, url_for, session, request, jsonify, flash, Markup
 from flask_oauthlib.client import OAuth
 from flask import render_template
 
 import pprint
 import os
 import time
+import json
+import pymongo
 
 # This code originally from https://github.com/lepture/flask-oauthlib/blob/master/example/github.py
 # Edited by P. Conrad for SPIS 2016 to add getting Client Id and Secret from
@@ -44,7 +46,11 @@ def home():
 
 #redirect to HitHub'[s OAuth page and confirm the callback URL
 @app.route('/login')
-def login():   
+def login():
+    client = pymongo.MongoClient("mongodb://<dbuser>:<dbpassword>@ds247449.mlab.com:47449/dsw-final-project")
+    database = client["dsw-final-project"]
+    clientData = database["clientData"]
+
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https'))
 
 @app.route('/logout')
