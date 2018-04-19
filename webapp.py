@@ -1,10 +1,11 @@
-from flask import Flask, redirect, url_for, session, request, jsonify, flash
+from flask import Flask, redirect, url_for, session, request, jsonify, flash, Markup
 from flask_oauthlib.client import OAuth
 from flask import render_template
 
 import pprint
 import os
 import time
+import json
 import pymongo
 
 # This code originally from https://github.com/lepture/flask-oauthlib/blob/master/example/github.py
