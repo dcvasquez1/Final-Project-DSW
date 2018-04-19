@@ -48,7 +48,7 @@ def home():
 #redirect to HitHub'[s OAuth page and confirm the callback URL
 @app.route('/login')
 def login():
-    client = pymongo.MongoClient("mongodb://<dbuser>:<dbpassword>@ds247449.mlab.com:47449/dsw-final-project")
+    client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
     database = client["dsw-final-project"]
     clientData = database["clientData"]
 
