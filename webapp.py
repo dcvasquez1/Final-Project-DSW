@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, session, request, jsonify, flash, Markup
+from flask import Flask, redirect, url_for, session, request, jsonify, flash
 from flask_oauthlib.client import OAuth
 from flask import render_template
 
