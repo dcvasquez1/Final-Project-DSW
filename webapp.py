@@ -47,17 +47,15 @@ def home():
 @app.route('/postedScore', methods=['POST'])
 def postScore():
     try:
-        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
-    	database = client["dsw-final-project"]
-    	clientData = database["clientData"]
-	
+	client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+	database = client["dsw-final-project"]
+	clientData = database["clientData"]
 	username = session['user_data']['login']
 	score = request.form['score']
 	clientData.insert_one({'username': username, 'score': score})
-	
-        return render_template('home.html', user_scores=scores_to_html())
+	return render_template('home.html', user_scores=scores_to_html())
     except Exception as e:
-        return render_template('home.html', user_scores=Markup('<p>' + str(e) + '</p>'))
+	return render_template('home.html', user_scores=Markup('<p>' + str(e) + '</p>'))
 
 def scores_to_html():
     try:
@@ -71,10 +69,10 @@ def scores_to_html():
             tableString += " <td>" + i['score'] + "</td>"
             tableString += ' </tr> '
         tableString += " </table>"
-        table = Markup(tableString)
+	table = Markup(tableString)
         return table
     except Exception as e:
-   	return Markup('<p>' + str(e) + '</p>')
+        return Markup('<p>' + str(e) + '</p>')
 
 #redirect to HitHub'[s OAuth page and confirm the callback URL
 @app.route('/login')
