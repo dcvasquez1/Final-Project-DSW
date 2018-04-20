@@ -74,7 +74,7 @@ def postScore():
     except Exception as e:
         return render_template('scoreboard.html', scoreboard_table=Markup('<p>' + str(e) + '</p>'))
 
-def findAvg:
+def findAvg():
     try:
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
@@ -89,7 +89,7 @@ def findAvg:
     except:
 	return Markup("<p> Unable to find user data </p>")
 	
-def findHigh:
+def findHigh():
     try:
 	client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
        	database = client["dsw-final-project"]
@@ -104,7 +104,7 @@ def findHigh:
     except:
         return Markup("<p> Unable to find user data </p>")
 	
-def findNum:
+def findNum():
     try:
 	client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
        	database = client["dsw-final-project"]
