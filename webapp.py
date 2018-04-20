@@ -44,19 +44,6 @@ def inject_logged_in():
 def home():
     return render_template('home.html')
 
-@app.route('/postedScore', methods=['POST'])
-def postScore():
-    try:
-        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
-        database = client["dsw-final-project"]
-        clientData = database["clientData"]
-        username = session['user_data']['login']
-        score = request.form['score']
-        clientData.insert_one({'username': username, 'score': score})
-        return render_template('home.html', user_scores=scores_to_html())
-    except Exception as e:
-        return render_template('home.html', user_scores=Markup('<p>' + str(e) + '</p>'))
-
 def scores_to_html():
     try:
         tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th> Username </th> <th> High Score </th> </tr>'
@@ -73,6 +60,20 @@ def scores_to_html():
         return table
     except Exception as e:
         return Markup('<p>' + str(e) + '</p>')
+
+@app.route('/postedScore', methods=['POST'])
+def postScore():
+    try:
+        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+        database = client["dsw-final-project"]
+        clientData = database["clientData"]
+        username = session['user_data']['login']
+        score = request.form['score']
+        clientData.insert_one({'username': username, 'score': score})
+        return render_template('scoreboard.html', scoreboard_table=scores_to_html())
+    except Exception as e:
+        return render_template('scoreboard.html', scoreboard_table=Markup('<p>' + str(e) + '</p>'))
+
 
 #redirect to HitHub'[s OAuth page and confirm the callback URL
 @app.route('/login')
@@ -110,7 +111,7 @@ def authorized():
 
 @app.route('/scoreboard')
 def renderScoreboard():
-    return render_template('scoreboard.html')
+    return render_template('scoreboard.html', scoreboard_table=scores_to_html())
 
 @app.route('/clientProfile')
 def renderClientProfile():
