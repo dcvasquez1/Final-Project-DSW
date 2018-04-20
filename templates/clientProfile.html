@@ -3,8 +3,15 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-	<h1>Profile</h1>
+	{{ username }}
 	
-	<p>Placeholder text</p>
+	<h3>Average Score:</h3>
+	{{ high_score }}
+
+	<h3>High Score:</h3>
+	{{ avg_score }}
+
+	<h3>Games Played:</h3>
+	{{ games_played }}
 
 {% endblock %}
