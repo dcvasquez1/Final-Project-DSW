@@ -74,6 +74,47 @@ def postScore():
     except Exception as e:
         return render_template('scoreboard.html', scoreboard_table=Markup('<p>' + str(e) + '</p>'))
 
+def findAvg:
+	try:
+		client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+        	database = client["dsw-final-project"]
+        	clientData = database["clientData"]
+        	username = session['user_data']['login']
+		
+		avgScore = 0
+		for gameEntry in clientData.find({"username": str(username)})
+			avgScore += gameEntry['score']
+		avgScore = (avgScore)/(clientData.count({"username": str(username)}))
+		return Markup("<p> " + str(avgScore) + " </p>")
+	except:
+		return Markup("<p> Unable to find user data </p>")
+	
+def findHigh:
+	try:
+		client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+        	database = client["dsw-final-project"]
+        	clientData = database["clientData"]
+        	username = session['user_data']['login']
+		
+		highScore = 0
+		for gameEntry in clientData.find({"username": str(username)})
+			if gameEntry['score'] > highScore:
+				highScore = gameEntry['score']
+		return Markup("<p> " + str(highScore) + " </p>")
+	except:
+		return Markup("<p> Unable to find user data </p>")
+	
+def findNum:
+	try:
+		client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+        	database = client["dsw-final-project"]
+        	clientData = database["clientData"]
+        	username = session['user_data']['login']
+
+		numPlayed (clientData.count({"username": str(username)}))
+		return Markup("<p> " + str(numPlayed) + " </p>")
+	except:
+		return Markup("<p> Unable to find user data </p>")
 
 #redirect to HitHub'[s OAuth page and confirm the callback URL
 @app.route('/login')
@@ -115,7 +156,11 @@ def renderScoreboard():
 
 @app.route('/clientProfile')
 def renderClientProfile():
-    return render_template('clientProfile.html')
+    try:
+	user = "<h1> " + str(session['user_data']['login']) + " </h1>"
+    	return render_template('clientProfile.html', username=user, high_score=findHigh(), avg_score=findAvg(), games_played=findNum())
+    except:
+	return render_template('clientProfile.html', username='<h1> Guest User </h1>')
 
 @app.route('/gamePage')
 def renderGamePage():
