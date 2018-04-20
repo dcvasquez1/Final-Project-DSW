@@ -80,7 +80,6 @@ def findAvg():
         database = client["dsw-final-project"]
         clientData = database["clientData"]
 	username = session['user_data']['login']
-        
 	avgScore = 0
 	for gameEntry in clientData.find({"username": str(username)})
 	    avgScore += gameEntry['score']
