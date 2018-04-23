@@ -157,9 +157,9 @@ def renderScoreboard():
 def renderClientProfile():
     try:
         user = "<h1> " + str(session['user_data']['login']) + " </h1>"
-        return render_template('clientProfile.html', username=user, high_score=findHigh(), avg_score=findAvg(), games_played=findNum())
+        return render_template('clientProfile.html', username=Markup(user), high_score=findHigh(), avg_score=findAvg(), games_played=findNum())
     except:
-        return render_template('clientProfile.html', username='<h1> Guest User </h1>')
+        return render_template('clientProfile.html', username=Markup('<h1> Guest User </h1>'))
 
 @app.route('/gamePage')
 def renderGamePage():
