@@ -81,7 +81,7 @@ def findAvg():
         clientData = database["clientData"]
         username = session['user_data']['login']
         avgScore = 0
-        for gameEntry in clientData.find({ "username": str(username) })
+        for gameEntry in clientData.find({ "username": str(username) }):
             avgScore += gameEntry['score']
         avgScore = (avgScore)/(clientData.count({ "username": str(username) }))
         return Markup("<p> " + str(avgScore) + " </p>")
@@ -96,7 +96,7 @@ def findHigh():
         username = session['user_data']['login']
 	
         highScore = 0
-        for gameEntry in clientData.find({ "username": str(username) })
+        for gameEntry in clientData.find({ "username": str(username) }):
             if gameEntry['score'] > highScore:
                 highScore = gameEntry['score']
         return Markup("<p> " + str(highScore) + " </p>")
