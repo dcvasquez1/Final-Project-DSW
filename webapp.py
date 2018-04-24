@@ -163,7 +163,15 @@ def renderClientProfile():
 
 @app.route('/gamePage')
 def renderGamePage():
-    return render_template('gamePage.html')
+    client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+    database = client["dsw-final-project"]
+    sampleStrings = database["sampleStrings"]
+
+    sampleStringArray = []
+    for s in sampleStrings.find():
+        sampleStringArray.append(s)
+    givenString = sampleStringArray[randInt(0, (len(sampleStringArray)-1))]["quote"]
+    return render_template('gamePage.html', provided_quote=givenString)
 
 @app.route('/response')
 def textComplete():
