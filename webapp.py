@@ -116,7 +116,11 @@ def findNum():
     except:
         return Markup("<p> Unable to find user data </p>")
 
-#redirect to HitHub'[s OAuth page and confirm the callback URL
+@app.route('/showScore')
+def showScore():
+    return Markup('<p>Score will be shown here</p>')
+
+#redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
 def login():
     client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
