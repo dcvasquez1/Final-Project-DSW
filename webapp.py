@@ -171,7 +171,7 @@ def renderGamePage():
     sampleStringArray = []
     for s in sampleStrings.find():
         sampleStringArray.append(s)
-    givenString = sampleStringArray[randInt(0, (len(sampleStringArray)-1))]["quote"]
+    givenString = sampleStringArray[randint(0, (len(sampleStringArray)-1))]["quote"]
     return render_template('gamePage.html', provided_quote=givenString)
 
 @app.route('/response')
