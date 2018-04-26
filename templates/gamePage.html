@@ -21,7 +21,7 @@
 		
 		
 		$(document).ready(function(){
-			$("#textBox").submit(function(){
+			$("#textBox").submit(function(event){
 				$("#textBox").load("/showScore");
 				event.preventDefault();
 			});
