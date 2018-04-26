@@ -22,7 +22,8 @@
 		
 		$(document).ready(function(){
 			$("#textBox").submit(function(){
-				$("#textBox").load("/showScore")
+				$("#textBox").load("/showScore");
+				event.preventDefault();
 			});
 		});
 	</script>
