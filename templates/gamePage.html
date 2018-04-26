@@ -18,6 +18,13 @@
 				providedQuote.style.display = "block";
 			}, 4000);
 		}
+		
+		
+		$(document).ready(function(){
+			$("input[name='text_submit']").click(function(){
+				$("textBox").load("/showScore")
+			});
+		});
 	</script>
 
 	<h1>Type Quickly!</h1>
@@ -31,11 +38,11 @@
 		{{ provided_quote }} 	
 	</div>
 	
-	<form action="response" method = "post">
+	<form id="textBox">
 		Copy the text from above.<br>
 		<input type="text" name="return-text">
 		<br><br>
-		<input type="submit">
+		<input type="submit" name="text_submit">
 	</form>
 
 {% endblock %}
