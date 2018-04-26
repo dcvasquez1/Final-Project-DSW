@@ -21,9 +21,8 @@
 		
 		
 		$(document).ready(function(){
-			$("#textBox").submit(function(event){
+			$("#textBox").submit(function(){
 				$("#textBox").load("/showScore");
-				event.preventDefault();
 			});
 		});
 	</script>
@@ -39,7 +38,7 @@
 		{{ provided_quote }} 	
 	</div>
 	
-	<form id="textBox" action="gamePage">
+	<form id="textBox">
 		Copy the text from above.<br>
 		<input type="text">
 		<br><br>
