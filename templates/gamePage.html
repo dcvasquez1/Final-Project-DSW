@@ -21,7 +21,7 @@
 		
 		
 		$(document).ready(function(){
-			$("form[name='textBox']").click(function(){
+			$("#textBox").submit(function(){
 				$("textBox").load("/showScore")
 			});
 		});
@@ -38,7 +38,7 @@
 		{{ provided_quote }} 	
 	</div>
 	
-	<form name="textBox">
+	<form id="textBox">
 		Copy the text from above.<br>
 		<input type="text" name="return-text">
 		<br><br>
