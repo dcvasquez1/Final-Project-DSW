@@ -9,6 +9,7 @@
   			var introText;
   			introText = document.getElementById("introText");
 			introText.innerHTML = "Starting Game..."
+			document.getElementById("textBox").style.display = "block";
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 3 seconds" }, 1000);
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 2 seconds" }, 2000);
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 1 second" }, 3000);
@@ -21,7 +22,7 @@
 		
 		
 		$(document).ready(function(){
-			$(":submit").click(function(e){
+			$("submitText").click(function(e){
 				e.preventDefault();
 				var reply = $("input#givenText").val();
 				$("form#textBox").load("/showScore");
@@ -40,11 +41,11 @@
 		{{ provided_quote }} 	
 	</div>
 	
-	<form id="textBox">
+	<form id="textBox" style="display: none">
 		Copy the text from above.<br>
 		<input type="text" autofocus="autofocus" id="givenText">
 		<br><br>
-		<input type="submit">
+		<input type="submit" id="submitText">
 	</form>
 
 {% endblock %}
