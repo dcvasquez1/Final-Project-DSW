@@ -22,6 +22,7 @@
 		
 		$(document).ready(function(){
 			$(":submit").click(function(e){
+				e.preventDefault();
 				var reply = $("input#givenText").val();
 				$("form#textBox").load("/showScore");
 			});
