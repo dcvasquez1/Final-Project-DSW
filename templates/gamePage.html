@@ -21,8 +21,9 @@
 		
 		
 		$(document).ready(function(){
-			$("form").submit(function(){
-				$("#textBox").load("/showScore");
+			$(":submit").click(function(e){
+				var reply = $("input#givenText").val();
+				$("form#textBox").load("/showScore");
 			});
 		});
 	</script>
@@ -40,7 +41,7 @@
 	
 	<form id="textBox">
 		Copy the text from above.<br>
-		<input type="text">
+		<input type="text" id="givenText">
 		<br><br>
 		<input type="submit">
 	</form>
