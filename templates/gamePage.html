@@ -24,6 +24,7 @@
 		$(document).ready(function(){
 			$("#textBox").submit(function(e){
 				e.preventDefault();
+				document.getElementById("typedText").style.display = "none";
 				var reply = $("input#givenText").val();
 				$("form#textBox").load("/showScore");
 			});
