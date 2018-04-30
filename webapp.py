@@ -118,9 +118,9 @@ def findNum():
 
 @app.route('/showScore', methods = ['POST'])
 def showScore():
-    clientTypedString = request.form["typed_text"]
-    templateString = request.form["original_text"]
-    return Markup('<p>You typed: ' + clientTypedString + ' Original String: ' + templateString + '</p>')
+    #clientTypedString = request.form["typed_text"]
+    #templateString = request.form["original_text"]
+    return Markup('<p>You typed:  Original String: </p>')
 
 #redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
