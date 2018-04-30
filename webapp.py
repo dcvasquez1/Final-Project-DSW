@@ -116,9 +116,11 @@ def findNum():
     except:
         return Markup("<p> Unable to find user data </p>")
 
-@app.route('/showScore')
+@app.route('/showScore', methods = ['POST'])
 def showScore():
-    return Markup('<p>Score will be shown here</p>')
+    clientTypedString = request.form["typed_text"]
+    templateString = request.form["original_text"]
+    return Markup('<p>You typed: ' clientTypedString + ' Original String: ' + templateString + '</p>')
 
 #redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
