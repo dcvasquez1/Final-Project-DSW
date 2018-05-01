@@ -23,8 +23,8 @@
 		
 		$(document).ready(function(){
 			$("#textBox").submit(function(e){
-				var clientTypedResponse = document.getElementById("givenText");
-				var chosenSampleString = document.getElementById("typedText");
+				//var clientTypedResponse = document.getElementById("givenText");
+				//var chosenSampleString = document.getElementById("typedText");
 				e.preventDefault();
 				var reply = $("input#givenText").val();
 				$("form#textBox").load("/showScore");
