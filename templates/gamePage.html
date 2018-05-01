@@ -27,7 +27,7 @@
 				//var chosenSampleString = document.getElementById("typedText");
 				e.preventDefault();
 				var reply = $("input#givenText").val();
-				$("form#textBox").post("/showScore");
+				$("form#textBox").load("/showScore");
 						       //,{
 							//typed_text: clientTypedResponse,
 							//original_text: chosenSampleString
