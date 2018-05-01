@@ -120,7 +120,7 @@ def findNum():
 def showScore():
     #clientTypedString = request.form["typed_text"]
     #templateString = request.form["original_text"]
-    return Markup('<p>You typed:  Original String: </p>')
+    return Markup('<p>back to basics</p>')
 
 #redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
