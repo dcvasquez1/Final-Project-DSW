@@ -27,7 +27,7 @@
 				//var chosenSampleString = document.getElementById("typedText");
 				e.preventDefault();
 				var reply = $("input#givenText").val();
-				$("form#textBox").load("/showScore", { typed_text: ":)", original_text: "haHAA" });
+				$("form#textBox").load("/showScore");//, { typed_text: ":)", original_text: "haHAA" });
 				document.getElementById("typedText").style.display = "none";
 			});
 		});
