@@ -27,7 +27,7 @@
 				//var chosenSampleString = document.getElementById("typedText");
 				e.preventDefault();
 				var reply = $("input#givenText").val();
-				$("form#textBox").load("/showScore", { typed_text: "gosu test", original_text: "no gosu - weak ass" } );
+				$("form#textBox").load("/showScore", { typed_text: clientTypedResponse, original_text: "no gosu - weak ass" } );
 				document.getElementById("typedText").style.display = "none";
 			});
 		});
