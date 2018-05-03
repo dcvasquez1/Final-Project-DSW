@@ -124,7 +124,7 @@ def showScore():
     templateArray = templateString.split()
     correctWords = 0
     for i, templateWord in enumerate(templateArray):
-        while i < len(typedArray):
+        if i < len(typedArray):
             if templateWord == typedArray[i]:
                 correctWords += 1
     percentageCorrect = round(float((correctWords)/(len(templateArray))) * 100, 2)
