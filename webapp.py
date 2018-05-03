@@ -116,7 +116,7 @@ def findNum():
     except:
         return Markup("<p> Unable to find user data </p>")
 
-@app.route('/showScore')
+@app.route('/showScore', methods=['POST'])
 def showScore():
     #clientTypedString = request.form["typed_text"]
     #templateString = request.form["original_text"]
