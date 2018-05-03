@@ -120,7 +120,16 @@ def findNum():
 def showScore():
     clientTypedString = request.form["typed_text"]
     templateString = request.form["original_text"]
-    return Markup('<p>You typed: ' + clientTypedString + '</p><br>' + 'Original Text: ' + templateString + '</p>')
+    typedArray = clientTypedString.split()
+    templateArray = templateString.split()
+    correctWords = 0
+    for i, templateWord in enumerate(templateArray):
+        while i < lent(typedArray):
+            if templateWord == typedArray[i]:
+                correctWords += 1
+    percentageCorrect = round(float((correctWords)/(len(templateArray)) * 100, 2)
+    
+    return Markup('<p>You typed: ' + clientTypedString + '</p><br>' + 'Original Text: ' + templateString + '</p><br>' + '<p>' + 'Percentage Correct: ' + str(percentageCorrect) + '</p>')
 
 #redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
