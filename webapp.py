@@ -129,7 +129,7 @@ def showScore():
                 correctWords += 1
     percentageCorrect = round(float((correctWords)/(len(templateArray))) * 100, 2)
     
-    return Markup('<p>You typed: ' + clientTypedString + '</p><p>Original Text: ' + templateString + '</p><p>Percentage Correct: '+ str(percentageCorrect) + '%</p>')
+    return Markup('<p><b>You typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> '+ str(percentageCorrect) + '%</p>')
 
 #redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
