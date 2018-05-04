@@ -19,7 +19,15 @@
 				providedQuote.style.display = "block";
 			}, 4000);
 		}
-		
+    		function start() {
+			var date1 = new Date();
+			return date1.getTime()
+    		}
+
+    		function endTime(startTime) {
+        		var date2 = new Date();
+			return date2.getTime()
+		}
 		
 		$(document).ready(function(){
 			$("#textBox").submit(function(e){
