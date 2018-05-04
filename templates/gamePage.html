@@ -5,6 +5,18 @@
 {% block content %}
 
 	<script>
+		var stopwatchStart = 0;
+		
+		function startTime() {
+			var date1 = new Date();
+			return date1.getTime()
+    		}
+
+    		function endTime() {
+        		var date2 = new Date();
+			return date2.getTime()
+		}
+		
 		function startGame() {
   			var introText;
   			introText = document.getElementById("introText");
@@ -15,27 +27,20 @@
 			setTimeout(function () { introText.innerHTML = "Game Starting in: 1 second" }, 3000);
 			setTimeout(function () { 
 				introText.innerHTML = "";
+				window.stopwatchStart = startTime();
 				providedQuote = document.getElementById("typedText");
 				providedQuote.style.display = "block";
 			}, 4000);
 		}
-    		function start() {
-			var date1 = new Date();
-			return date1.getTime()
-    		}
-
-    		function endTime(startTime) {
-        		var date2 = new Date();
-			return date2.getTime()
-		}
-		
+    		
 		$(document).ready(function(){
 			$("#textBox").submit(function(e){
 				var clientTypedResponse = document.getElementById("givenText").value;
 				var chosenSampleString = document.getElementById("typedText").innerHTML;
+				var timeElapsed = endTime()-window.stopwatchStart
 				e.preventDefault();
 				var reply = $("input#givenText").val();
-				$("form#textBox").load("/showScore", { typed_text: clientTypedResponse, original_text: chosenSampleString } );
+				$("form#textBox").load("/showScore", { typed_text: clientTypedResponse, original_text: chosenSampleString, typing_time: timeElapsed } );
 				document.getElementById("typedText").style.display = "none";
 			});
 		});
