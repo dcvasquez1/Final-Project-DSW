@@ -136,7 +136,7 @@ def showScore():
     
     userWPM = round((correctWords)/(timeInMinutes), 1)
     
-    return Markup('<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> '+ str(percentageCorrect) + '%</p><p><b>Typing Time:</b> ' + timeInMilliseconds + 'ms</p><p><b>Typing Speed:</b> ' + str(userWPM) + 'wpm</p>')
+    return Markup('<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> '+ str(percentageCorrect) + '%</p><p><b>Typing Time:</b> ' + str(timeInSeconds) + 'ms</p><p><b>Typing Speed:</b> ' + str(userWPM) + 'wpm</p>')
 
 #redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
