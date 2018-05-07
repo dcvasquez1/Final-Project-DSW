@@ -139,9 +139,10 @@ def showScore():
 
     client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
     database = client["dsw-final-project"]
-    sampleStrings = database["sampleStrings"]
+    clientScores = database["clientData"]
     
-    
+    try:
+    	clientScores.insert_one( { 'username': session['user_data']['login'], 'score': str(userWPM), 'percentage': str(percentageCorrect) } )
     return Markup('<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> '+ str(percentageCorrect) + '%</p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
 
 #redirect to GitHub's OAuth page and confirm the callback URL
