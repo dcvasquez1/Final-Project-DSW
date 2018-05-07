@@ -47,7 +47,7 @@ def home():
 
 def scores_to_html():
     try:
-        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th> Username </th> <th> High Score </th> </tr>'
+        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th> Username </th> <th> Score </th> <th> Percentage </th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         clientData = database["clientData"]
@@ -55,6 +55,7 @@ def scores_to_html():
         for i in clientData.find():
             tableString += " <tr> <td>" + i['username'] + ": </td>"
             tableString += " <td>" + i['score'] + "</td>"
+            tableString += " <td> " + i['percentage'] + " </td>"
             tableString += ' </tr> '
         tableString += " </table>"
         table = Markup(tableString)
@@ -135,6 +136,11 @@ def showScore():
     percentageCorrect = round(float((correctWords)/(len(templateArray))) * 100, 2)
     
     userWPM = round((correctWords)/(timeInMinutes), 1)
+
+    client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+    database = client["dsw-final-project"]
+    sampleStrings = database["sampleStrings"]
+    
     
     return Markup('<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> '+ str(percentageCorrect) + '%</p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
 
