@@ -54,8 +54,8 @@ def scores_to_html():
         
         for i in clientData.find():
             tableString += " <tr> <td>" + i['username'] + ": </td>"
-            tableString += " <td>" + i['score'] + "</td>"
-            tableString += " <td> " + i['percentage'] + " </td>"
+            tableString += " <td>" + i['score'] + " WPM</td>"
+            tableString += " <td> " + i['percentage'] + "%</td>"
             tableString += ' </tr> '
         tableString += " </table>"
         table = Markup(tableString)
