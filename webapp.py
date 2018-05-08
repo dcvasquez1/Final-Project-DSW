@@ -85,7 +85,7 @@ def findAvg():
         avgScore = 0
         for gameEntry in clientData.find({ "username": str(username) }):
             avgScore += float(gameEntry['score'])
-        avgScore = round(( (avgScore)/(clientData.count({ "username": str(username) }) )), 1)
+        avgScore = round(( (avgScore) / float(clientData.count({ "username": str(username) }) ) ), 1)
         return Markup("<p> " + str(avgScore) + " </p>")
     except Exception as e:
         return Markup("<p> Unable to find user data. Exception: " + str(e) + "</p>")
