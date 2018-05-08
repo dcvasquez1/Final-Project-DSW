@@ -47,7 +47,7 @@ def home():
 
 def scores_to_html():
     try:
-        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th><u> Username </u></th> <th><u> Score </u></th> <th><u> Percentage </u></th> </tr>'
+        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th><u> Username </u></th> <th><u> Score </u></th> <th><u> Accuracy </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         clientData = database["clientData"]
