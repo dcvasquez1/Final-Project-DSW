@@ -85,7 +85,7 @@ def findAvg():
         avgScore = 0
         for gameEntry in clientData.find({ "username": str(username) }):
             avgScore += float(gameEntry['score'])
-        avgScore = round(( (avgScore) / float(clientData.count({ "username": str(username) }) ) ), 1)
+        avgScore = round(( avgScore / clientData.count({ "username": str(username) }) ), 1)
         return Markup("<p> " + str(avgScore) + " </p>")
     except Exception as e:
         return Markup("<p> Unable to find user data. Exception: " + str(e) + "</p>")
@@ -100,7 +100,7 @@ def findHigh():
         highScore = 0
         for gameEntry in clientData.find({ "username": str(username) }):
             if int(gameEntry['score']) > highScore:
-                highScore = int(gameEntry['score'])
+                highScore = round(float(gameEntry['score']), 1)
         return Markup("<p> " + str(highScore) + " </p>")
     except Exception as e:
         return Markup("<p> Unable to find user data. Exception:" + str(e) + "</p>")
