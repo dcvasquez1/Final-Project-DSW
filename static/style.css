@@ -9,6 +9,14 @@ table th, td, tr {
     padding-bottom:3px;
 }
 
+body {
+    font-family: Exo\ 2,Helvetica Neue,Tahoma,Arial,Hiragino Kaku Gothic ProN,Meiryo,Microsoft YaHei,Apple SD Gothic Neo,sans-serif;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #555;
+    background-color: #fff;
+}
+
 #content {
      margin-left: 20px;
 }
