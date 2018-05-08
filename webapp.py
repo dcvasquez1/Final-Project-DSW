@@ -99,7 +99,7 @@ def findHigh():
 	
         highScore = 0
         for gameEntry in clientData.find({ "username": str(username) }):
-            if int(gameEntry['score']) > highScore:
+            if float(gameEntry['score']) > highScore:
                 highScore = round(float(gameEntry['score']), 1)
         return Markup("<p> " + str(highScore) + " </p>")
     except Exception as e:
