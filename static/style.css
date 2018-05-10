@@ -30,7 +30,7 @@
 }
 
 /* Right Side of Navbar */
-.navbar-default .navbar-nav .navbar-right > li > a {
+.navbar-default .navbar-collapse .navbar-nav .navbar-right > li > a {
 	background-color: #9600f0;
 	color: #f0dcff;
 }
