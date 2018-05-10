@@ -22,19 +22,20 @@
 	color: #f0dcff;
 }
 
-/* Navbar Header
+/* Navbar Header */
 .navbar-default .navbar-header {
 	background-color: #9600f0;
 	border-color: #9600f0;
 	color: #f0dcff;
 }
 
-/* Right Side of Navbar
-.navbar-default .navbar-collapse .navbar-nav .navbar-right > li > a {
+/* Right Side of Navbar */
+.navbar-default .navbar-nav .navbar-right > li > a,
+.navbar-default .navbar-nav .navbar-right > li > p {
 	background-color: #9600f0;
 	color: #f0dcff;
 }
-*/
+
 
 body {
 
