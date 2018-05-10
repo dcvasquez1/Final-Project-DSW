@@ -1,7 +1,5 @@
-
-
 /* Foundation */
-li a {
+.navbar-default {
 	background-color: #9600f0;
 	border-color: #9600f0;
 	color: #f0dcff;
@@ -17,20 +15,26 @@ li a {
 	color: #ffffff;
 }
 
-/* Default Navbar 
+/* Default Navbar */ 
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-brand {
 	background-color: #9600f0;
 	color: #f0dcff;
 }
 
- Right Side of Navbar 
-.navbar-default .navbar-right > li > a,
-.navbar-default .navbar-brand {
+/* Navbar Header */
+.navbar-default .navbar-header {
+	background-color: #9600f0;
+	border-color: #9600f0;
+	color: #f0dcff;
+}
+
+/* Right Side of Navbar */
+.navbar-default .navbar-nav .navbar-right > li > a {
 	background-color: #9600f0;
 	color: #f0dcff;
 }
-*/
+
 
 body {
 
