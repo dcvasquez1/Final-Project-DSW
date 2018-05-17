@@ -25,8 +25,7 @@
 }
 
 /* Right Side of Navbar */
-.navbar-default .navbar-nav .navbar-right > li > a,
-.navbar-default .navbar-nav .navbar-right > li > p {
+.navbar-default .navbar-nav .navbar-right .navbar-text {
 	background-color: #9600f0;
 	color: #f0dcff;
 }
