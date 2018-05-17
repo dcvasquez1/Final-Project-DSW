@@ -4,11 +4,11 @@
 }
 
 /* Selected Part of Navbar */
-.navbar-nav > .active > a,
-.navbar-nav > .active > a:hover,
-.navbar-nav > .active > a:focus,
-.navbar-nav > li > a:hover,
-.navbar-nav > li > a:focus {
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
 	background-color: #8c00e6;
 	color: #ffffff;
 }
