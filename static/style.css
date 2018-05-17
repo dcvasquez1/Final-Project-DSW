@@ -6,7 +6,8 @@
 /* Selected Part of Navbar */
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > li > a:hover, 
-.navbar-default .navbar-nav > li > a:focus {
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-brand {
 	background-color: #8c00e6;
 	color: #ffffff;
 }
