@@ -14,14 +14,14 @@
 }
 
 /* Default Navbar */
-.navbar-nav > li > a,
-.navbar-header > a {
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-header > a {
 	background-color: #9600f0;
 	color: #f0dcff;
 }
 
 /* Navbar Header */
-.navbar-header {
+.navbar-default .navbar-header {
 	background-color: #9600f0;
 	border-color: #9600f0;
 	color: #f0dcff;
