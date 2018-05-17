@@ -4,7 +4,7 @@
 }
 
 /* Selected Part of Navbar */
-.navbar-default .navbar-nav > .active {
+.navbar-default .navbar-nav > a > .active {
 	background-color: #8c00e6;
 	color: #ffffff;
 }
