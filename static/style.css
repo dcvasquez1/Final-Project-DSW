@@ -1,13 +1,15 @@
 /* Foundation */
 .navbar-default {
 	background-color: #9600f0;
+	border-color: #b16af8;
 }
 
 /* Selected Part of Navbar */
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > li > a:hover, 
 .navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-brand {
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
 	background-color: #8c00e6;
 	color: #ffffff;
 }
