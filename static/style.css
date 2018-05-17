@@ -25,6 +25,11 @@
 }
 
 /* Right Side of Navbar */
+.navbar-default .navbar-nav .navbar-right {
+	background-color: #9600f0;
+}
+
+/* Logged in Text */
 .navbar-default .navbar-text {
 	background-color: #9600f0;
 	color: #f0dcff;
