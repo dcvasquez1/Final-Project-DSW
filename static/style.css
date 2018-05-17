@@ -4,6 +4,7 @@
 }
 
 /* Selected Part of Navbar */
+.navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > a:hover, 
 .navbar-default .navbar-nav > a:focus {
 	background-color: #8c00e6;
