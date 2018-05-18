@@ -1,25 +1,30 @@
-/* Selected Part of Navbar */
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover, 
-.navbar-default .navbar-nav > .active > a:focus,
-.navbar-default .navbar-nav > li > a:hover, 
-.navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-	background-color: #8c00e6;
-	color: #ffffff;
-}
-
 /* Navbar Items */
 .navbar-default .navbar-nav > li > a {
 	background-color: #9600f0;
 	color: #f0dcff;
 }
 
+/* Navbar Item Selected */
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > li > a:hover, 
+.navbar-default .navbar-nav > li > a:focus {
+	background-color: #8c00e6;
+	color: #ffffff;
+}
+
+
 /* Navbar Brand */
 .navbar-default .navbar-header > a {
 	background-color: #8600e0;
 	color: #f0dcff;
+}
+
+/* Navbar Brand Selected */
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+	color: #ffffff;
 }
 
 /* Right Side of Navbar */
