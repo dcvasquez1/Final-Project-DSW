@@ -13,7 +13,7 @@
 /* Navbar Items */
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-header > a {
-	background-color: #ffde00;
+	background-color: #9600f0;
 	color: #f0dcff;
 }
 
@@ -26,7 +26,7 @@
 
 /* Right Side of Navbar */
 .navbar-default .navbar-right {
-	background-color: #ff0000;
+	background-color: #9600f0;
 }
 
 /* Logged in Text */
