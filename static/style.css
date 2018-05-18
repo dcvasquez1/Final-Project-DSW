@@ -10,7 +10,7 @@
 	color: #ffffff;
 }
 
-/* Default Navbar */
+/* Navbar Items */
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-header > a {
 	background-color: #ffde00;
@@ -34,6 +34,11 @@
 	background-color: #9600f0;
 	color: #f0dcff;
 	font-size: 14px;
+}
+
+/* Collapse */
+.navbar-default .navbar-collapse {
+    background-color: #9600f0;
 }
 
 /* Foundation */
