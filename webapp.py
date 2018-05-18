@@ -89,7 +89,21 @@ def findAvg():
         return Markup("<p> " + str(avgScore) + " WPM</p>")
     except Exception as e:
         return Markup("<p> Unable to find user data. Exception: " + str(e) + "</p>")
-	
+
+def findAcc():
+    try:
+        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+        database = client["dsw-final-project"]
+        clientData = database["clientData"]
+        username = session['user_data']['login']
+        avgScore = 0
+        for gameEntry in clientData.find({ "username": str(username) }):
+            acc += float(gameEntry['percentage'])
+        acc = round(( acc / clientData.count({ "username": str(username) }) ), 1)
+        return Markup("<p> " + str(avgScore) + "%</p>")
+    except Exception as e:
+        return Markup("<p> Unable to find user data. Exception: " + str(e) + "</p>")
+
 def findHigh():
     try:
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
