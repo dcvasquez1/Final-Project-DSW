@@ -24,6 +24,7 @@
 /* Navbar Brand Selected */
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
+	background-color: #8600e0;
 	color: #ffffff;
 }
 
