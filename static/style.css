@@ -18,17 +18,10 @@
 
 /* Navbar Brand */
 .navbar-default .navbar-header > a {
-	background-color: #7c00db;
+	background-color: #8600e0;
 	color: #f0dcff;
 }
 
-/* Navbar Header 
-.navbar-default .navbar-header {
-	background-color: #9600f0;
-	border-color: #9600f0;
-	color: #f0dcff;
-}
-*/
 /* Right Side of Navbar */
 .navbar-default .navbar-right {
 	background-color: #9600f0;
@@ -42,13 +35,14 @@
 
 /* Collapse */
 .navbar-default .navbar-collapse {
-    background-color: #9600f0;
+    	background-color: #9600f0;
 }
 
 /* Foundation */
 .navbar-default {
-    background-color: #9600f0;
-    border-color: #b16af8;
+    	background-color: #9600f0;
+    	border-color: #b16af8;
+	background-image: none;
 }
 
 body {
