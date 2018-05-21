@@ -51,6 +51,10 @@
 	background-image: none;
 }
 
+div.inline {
+	display:inline;
+}
+
 body {
 
 }
