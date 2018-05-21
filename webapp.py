@@ -112,7 +112,7 @@ def findAcc():
         database = client["dsw-final-project"]
         clientData = database["clientData"]
         username = session['user_data']['login']
-        avgScore = 0
+        acc = 0
         for gameEntry in clientData.find({ "username": str(username) }):
             acc += float(gameEntry['percentage'])
         acc = round(( acc / clientData.count({ "username": str(username) }) ), 1)
