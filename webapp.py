@@ -101,7 +101,7 @@ def findPP():
         for gameEntry in clientData.find({ "username": str(username) }):
             scoreSum += float(gameEntry['score'])
         scoreSum = round(( scoreSum / clientData.count({ "username": str(username) }) ), 1)
-	ppoints = scoreSum
+        ppoints = scoreSum
         return Markup("<p> " + str(ppoints) + " pp</p>")
     except Exception as e:
         return Markup("<p> Unable to find user data. " + str(e) + "</p>")
