@@ -86,9 +86,9 @@ def findAvg():
         for gameEntry in clientData.find({ "username": str(username) }):
             avgScore += float(gameEntry['score'])
         avgScore = round(( avgScore / clientData.count({ "username": str(username) }) ), 1)
-        return Markup("<p> " + str(avgScore) + " WPM</p>")
+        return Markup(str(avgScore) + " WPM")
     except Exception as e:
-        return Markup("<p> Unable to find user data. </p>")
+        return Markup(" Unable to find user data. ")
 
 
 def findPP():
@@ -102,7 +102,7 @@ def findPP():
             scoreSum += float(gameEntry['score'])
         scoreSum = round(( scoreSum / clientData.count({ "username": str(username) }) ), 1)
         ppoints = scoreSum
-        return Markup("<p> " + str(ppoints) + " pp</p>")
+        return Markup(str(ppoints) + " pp")
     except Exception as e:
         return Markup("<p> Unable to find user data. " + str(e) + "</p>")
 
