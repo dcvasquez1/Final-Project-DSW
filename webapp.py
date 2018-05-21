@@ -88,7 +88,22 @@ def findAvg():
         avgScore = round(( avgScore / clientData.count({ "username": str(username) }) ), 1)
         return Markup("<p> " + str(avgScore) + " WPM</p>")
     except Exception as e:
-        return Markup("<p> Unable to find user data. Exception: " + str(e) + "</p>")
+        return Markup("<p> Unable to find user data. </p>")
+
+
+def findPP():
+    try:
+        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+        database = client["dsw-final-project"]
+        clientData = database["clientData"]
+        username = session['user_data']['login']
+        scoreSum = 0
+        for gameEntry in clientData.find({ "username": str(username) }):
+            scoreSum += float(gameEntry['score'])
+        scoreSum = round(( scoreSum / clientData.count({ "username": str(username) }) ), 1)
+        return Markup("<p> " + str(ppoints) + " pp</p>")
+    except Exception as e:
+        return Markup("<p> Unable to find user data. </p>")
 
 def findAcc():
     try:
@@ -102,7 +117,7 @@ def findAcc():
         acc = round(( acc / clientData.count({ "username": str(username) }) ), 1)
         return Markup("<p> " + str(avgScore) + "%</p>")
     except Exception as e:
-        return Markup("<p> Unable to find user data. Exception: " + str(e) + "</p>")
+        return Markup("<p> Unable to find user data. </p>")
 
 def findHigh():
     try:
@@ -117,7 +132,7 @@ def findHigh():
                 highScore = round(float(gameEntry['score']), 1)
         return Markup("<p> " + str(highScore) + " WPM</p>")
     except Exception as e:
-        return Markup("<p> Unable to find user data. Exception:" + str(e) + "</p>")
+        return Markup("<p> Unable to find user data. </p>")
 	
 def findNum():
     try:
@@ -203,9 +218,9 @@ def renderScoreboard():
 def renderClientProfile():
     try:
         user = "<h1> " + str(session['user_data']['login']) + " </h1>"
-        return render_template('clientProfile.html', username=Markup(user), high_score=findHigh(), avg_score=findAvg(), games_played=findNum())
+        return render_template('clientProfile.html', username=Markup(user), high_score=findHigh(), avg_score=findAvg(), games_played=findNum(), pp=findPP(), acc=findAcc())
     except:
-        return render_template('clientProfile.html', username=Markup('<h1> Guest User </h1>'), high_score=findHigh(), avg_score=findAvg(), games_played=findNum())
+        return render_template('clientProfile.html', username=Markup('<h1> Guest User - Log in to Record Your Scores </h1>'), high_score=findHigh(), avg_score=findAvg(), games_played=findNum(), pp=findPP(), acc=findAcc())
 
 @app.route('/gamePage')
 def renderGamePage():
