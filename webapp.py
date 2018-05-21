@@ -101,9 +101,10 @@ def findPP():
         for gameEntry in clientData.find({ "username": str(username) }):
             scoreSum += float(gameEntry['score'])
         scoreSum = round(( scoreSum / clientData.count({ "username": str(username) }) ), 1)
+	ppoints = scoreSum
         return Markup("<p> " + str(ppoints) + " pp</p>")
     except Exception as e:
-        return Markup("<p> Unable to find user data. </p>")
+        return Markup("<p> Unable to find user data. " + str(e) + "</p>")
 
 def findAcc():
     try:
@@ -115,9 +116,9 @@ def findAcc():
         for gameEntry in clientData.find({ "username": str(username) }):
             acc += float(gameEntry['percentage'])
         acc = round(( acc / clientData.count({ "username": str(username) }) ), 1)
-        return Markup("<p> " + str(avgScore) + "%</p>")
+        return Markup("<p> " + str(acc) + "%</p>")
     except Exception as e:
-        return Markup("<p> Unable to find user data. </p>")
+        return Markup("<p> Unable to find user data. " + str(e) + "</p>")
 
 def findHigh():
     try:
