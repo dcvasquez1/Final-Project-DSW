@@ -118,7 +118,7 @@ def findAcc():
         acc = round(( acc / clientData.count({ "username": str(username) }) ), 1)
         return Markup('<p> ' + str(acc) + "%</p>")
     except Exception as e:
-        return Markup('<p> Unable to find user data. ' + str(e) + "</p>")
+        return Markup("<p> Unable to find user data. </p>")
 
 def findHigh():
     try:
@@ -221,7 +221,7 @@ def renderClientProfile():
         user = "<h1> " + str(session['user_data']['login']) + " </h1>"
         return render_template('clientProfile.html', username=Markup(user), high_score=findHigh(), avg_score=findAvg(), games_played=findNum(), pp=findPP(), acc=findAcc())
     except:
-        return render_template('clientProfile.html', username=Markup('<h1> Guest User - Log in to Record Your Scores </h1>'), high_score=findHigh(), avg_score=findAvg(), games_played=findNum(), pp=findPP(), acc=findAcc())
+        return render_template('clientProfile.html', username=Markup('<h1> Guest User </h1> <p><b>-- Log in to record scores --</b></p>'), high_score=findHigh(), avg_score=findAvg(), games_played=findNum(), pp=findPP(), acc=findAcc())
 
 @app.route('/gamePage')
 def renderGamePage():
