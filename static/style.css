@@ -73,3 +73,9 @@ body {
 #content {
      margin-left: 20px;
 }
+
+#centeredDiv {
+	width:864px;
+	margin-left: auto;
+	margin-right: auto;
+}
