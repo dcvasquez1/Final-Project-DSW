@@ -63,6 +63,24 @@ def scores_to_html():
     except Exception as e:
         return Markup('<p>' + str(e) + '</p>')
 
+def createLeaderboard():
+    try:
+        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th><u> Username </u></th> <th><u> Play Count </u></th> <th><u> Performance </u></th> <th><u> Accuracy </u></th> <th><u> S </u></th> <th><u> A </u></th> <th><u> B </u></th> </tr>'
+        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
+        database = client["dsw-final-project"]
+        clientData = database["clientData"]
+        
+        for i in clientData.find():
+            tableString += " <tr> <td><b>" + i['username'] + ":</b> </td>"
+            tableString += " <td>" + i['score'] + " WPM</td>"
+            tableString += " <td> " + i['percentage'] + "%</td>"
+            tableString += ' </tr> '
+        tableString += " </table>"
+        table = Markup(tableString)
+        return table
+    except Exception as e:
+        return Markup('<p>' + str(e) + '</p>')
+
 @app.route('/postedScore', methods=['POST'])
 def postScore():
     try:
@@ -170,13 +188,28 @@ def showScore():
     client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
     database = client["dsw-final-project"]
     clientScores = database["clientData"]
-    
+    rankString = ""
+
+    if percentageCorrect == 100.0:
+        rankString = '<p id="S_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">S</span></p>'
+    elif percentageCorrect >= 90.0:
+        rankString = '<p id="A_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">A</span></p>'
+    elif percentageCorrect >= 80.0:
+        rankString = '<p id="B_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">B</span></p>'
+    elif percentageCorrect >= 70.0:
+        rankString = '<p id="C_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">C</span></p>'
+    elif percentageCorrect >= 60.0:
+        rankString = '<p id="D_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">D</span></p>'
+    else: 
+        rankString = '<p id="F_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">F</span></p>'
+
     try:
         clientScores.insert_one( { 'username': session['user_data']['login'], 'score': str(userWPM), 'percentage': str(percentageCorrect) } )
-        return Markup('<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
+        return Markup(rankString + '<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
     except:
-        return Markup('<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p><br><p><b>**LOGIN TO SAVE SCORES**</b></p>')
+        return Markup(rankString + '<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p><br><p><b>**LOGIN TO SAVE SCORES**</b></p>')
 
+       
 #redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
 def login():
