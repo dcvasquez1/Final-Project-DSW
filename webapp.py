@@ -193,15 +193,15 @@ def showScore():
     if percentageCorrect == 100.0:
         rankString = '<p id="S_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">S</span></p>'
     elif percentageCorrect >= 90.0:
-        rankString = '<p id="A_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">A</span></p>'
+        rankString = '<p id="A_rank"><span style="font-size:200%">Rank: </span><span style="color:#57e54b; font-size:500%;">A</span></p>'
     elif percentageCorrect >= 80.0:
-        rankString = '<p id="B_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">B</span></p>'
+        rankString = '<p id="B_rank"><span style="font-size:200%">Rank: </span><span style="color:#007ff2; font-size:500%;">B</span></p>'
     elif percentageCorrect >= 70.0:
-        rankString = '<p id="C_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">C</span></p>'
+        rankString = '<p id="C_rank"><span style="font-size:200%">Rank: </span><span style="color:#f667d6; font-size:500%;">C</span></p>'
     elif percentageCorrect >= 60.0:
-        rankString = '<p id="D_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">D</span></p>'
+        rankString = '<p id="D_rank"><span style="font-size:200%">Rank: </span><span style="color:#ff4700; font-size:500%;">D</span></p>'
     else: 
-        rankString = '<p id="F_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">F</span></p>'
+        rankString = '<p id="F_rank"><span style="font-size:200%">Rank: </span><span style="color:#ff0000; font-size:500%;">F</span></p>'
 
     try:
         clientScores.insert_one( { 'username': session['user_data']['login'], 'score': str(userWPM), 'percentage': str(percentageCorrect) } )
