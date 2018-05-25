@@ -259,7 +259,7 @@ def renderScoreboard():
 
 @app.route('/leaderboard')
 def renderLeaderboard():
-    return render_template('scoreboard.html', leaderboard_table=createLeaderboard())
+    return render_template('leaderboard.html', leaderboard_table=createLeaderboard())
 
 @app.route('/clientProfile')
 def renderClientProfile():
