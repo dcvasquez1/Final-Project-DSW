@@ -53,9 +53,9 @@ def scores_to_html():
         clientData = database["clientData"]
         
         for i in clientData.find():
-            tableString += " <tr> <td><b>" + i['username'] + ":</b> </td>"
-            tableString += " <td>" + i['score'] + " WPM</td>"
-            tableString += " <td> " + i['percentage'] + "%</td>"
+            tableString += " <tr> <td align='center'><b>" + i['username'] + ":</b> </td>"
+            tableString += " <td align='center'>" + i['score'] + " WPM</td>"
+            tableString += " <td align='center'> " + i['percentage'] + "%</td>"
             tableString += ' </tr> '
         tableString += " </table>"
         table = Markup(tableString)
@@ -76,13 +76,13 @@ def createLeaderboard():
             scoresArray.append(float(score['pp']))
         scoresArray = sorted(scoresArray, reverse=True)
         for i in rankingData.find():
-            tableString += " <tr> <td><b>" + i['username'] + ":</b> </td>"
-            tableString += " <td>" + i['gamesPlayed'] + "</td>"
-            tableString += " <td>" + i['pp'] + "</td>"
-            tableString += " <td>" + i['acc'] + "%</td>"
-            tableString += " <td>" + i['s-rank'] + "</td>"
-            tableString += " <td>" + i['a-rank'] + "</td>"
-            tableString += " <td>" + i['b-rank'] + "</td>"
+            tableString += " <tr> <td align='center'><b>" + i['username'] + ":</b> </td>"
+            tableString += " <td align='center'>" + i['gamesPlayed'] + "</td>"
+            tableString += " <td align='center'>" + i['pp'] + "</td>"
+            tableString += " <td align='center'>" + i['acc'] + "%</td>"
+            tableString += " <td align='center'>" + i['s-rank'] + "</td>"
+            tableString += " <td align='center'>" + i['a-rank'] + "</td>"
+            tableString += " <td align='center'>" + i['b-rank'] + "</td>"
             tableString += ' </tr> '
         tableString += " </table>"
         table = Markup(tableString)
