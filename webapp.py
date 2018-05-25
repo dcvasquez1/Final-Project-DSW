@@ -257,6 +257,10 @@ def authorized():
 def renderScoreboard():
     return render_template('scoreboard.html', scoreboard_table=scores_to_html())
 
+@app.route('/leaderboard')
+def renderScoreboard():
+    return render_template('scoreboard.html', leaderboard_table=createLeaderboard())
+
 @app.route('/clientProfile')
 def renderClientProfile():
     try:
