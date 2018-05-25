@@ -201,9 +201,9 @@ def showScore():
 
     if percentageCorrect == 100.0:
         rankString = '<p id="S_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">S</span></p>'
-    elif percentageCorrect >= 90.0:
+    elif percentageCorrect >= 93.5:
         rankString = '<p id="A_rank"><span style="font-size:200%">Rank: </span><span style="color:#57e54b; font-size:500%;">A</span></p>'
-    elif percentageCorrect >= 80.0:
+    elif percentageCorrect >= 82.5:
         rankString = '<p id="B_rank"><span style="font-size:200%">Rank: </span><span style="color:#007ff2; font-size:500%;">B</span></p>'
     elif percentageCorrect >= 70.0:
         rankString = '<p id="C_rank"><span style="font-size:200%">Rank: </span><span style="color:#f667d6; font-size:500%;">C</span></p>'
