@@ -47,15 +47,15 @@ def home():
 
 def scores_to_html():
     try:
-        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th><u> Username </u></th> <th><u> Score </u></th> <th><u> Accuracy </u></th> </tr>'
+        tableString = '<table id="scoreTable" cellpadding="5" style="text-align:center"> <tr> <th><u> Username </u></th> <th><u> Score </u></th> <th><u> Accuracy </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         clientData = database["clientData"]
         
         for i in clientData.find():
-            tableString += " <tr> <td align='center'><b>" + i['username'] + ":</b> </td>"
-            tableString += " <td align='center'>" + i['score'] + " WPM</td>"
-            tableString += " <td align='center'> " + i['percentage'] + "%</td>"
+            tableString += " <tr> <td><b>" + i['username'] + ":</b> </td>"
+            tableString += " <td>" + i['score'] + " WPM</td>"
+            tableString += " <td> " + i['percentage'] + "%</td>"
             tableString += ' </tr> '
         tableString += " </table>"
         table = Markup(tableString)
@@ -65,7 +65,7 @@ def scores_to_html():
 
 def createLeaderboard():
     try:
-        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th><u> Username </u></th> <th><u> Play Count </u></th> <th><u> Performance </u></th> <th><u> Accuracy </u></th> <th><u> S </u></th> <th><u> A </u></th> <th><u> B </u></th> </tr>'
+        tableString = '<table id="rankingTable" cellpadding="5" style="text-align:center"> <tr> <th><u> Username </u></th> <th><u> Play Count </u></th> <th><u> Performance </u></th> <th><u> Accuracy </u></th> <th><u> S </u></th> <th><u> A </u></th> <th><u> B </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         rankingData = database["rankingData"]
@@ -76,13 +76,13 @@ def createLeaderboard():
             scoresArray.append(float(score['pp']))
         scoresArray = sorted(scoresArray, reverse=True)
         for i in rankingData.find():
-            tableString += " <tr> <td align='center'><b>" + i['username'] + ":</b> </td>"
-            tableString += " <td align='center'>" + i['gamesPlayed'] + "</td>"
-            tableString += " <td align='center'>" + i['pp'] + "</td>"
-            tableString += " <td align='center'>" + i['acc'] + "%</td>"
-            tableString += " <td align='center'>" + i['s-rank'] + "</td>"
-            tableString += " <td align='center'>" + i['a-rank'] + "</td>"
-            tableString += " <td align='center'>" + i['b-rank'] + "</td>"
+            tableString += " <tr> <td><b>" + i['username'] + ":</b> </td>"
+            tableString += " <td>" + i['gamesPlayed'] + "</td>"
+            tableString += " <td>" + i['pp'] + "</td>"
+            tableString += " <td>" + i['acc'] + "%</td>"
+            tableString += " <td>" + i['s-rank'] + "</td>"
+            tableString += " <td>" + i['a-rank'] + "</td>"
+            tableString += " <td>" + i['b-rank'] + "</td>"
             tableString += ' </tr> '
         tableString += " </table>"
         table = Markup(tableString)
