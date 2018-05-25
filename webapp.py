@@ -73,7 +73,7 @@ def createLeaderboard():
         scoresArray = []
         
         for score in rankingData.find():
-            scoresArray += float(score['pp'])
+            scoresArray.append(float(score['pp']))
         scoresArray = sorted(scoresArray, reverse=True)
         for i in rankingData.find():
             tableString += " <tr> <td><b>" + i['username'] + ":</b> </td>"
