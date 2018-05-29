@@ -85,9 +85,9 @@ def createLeaderboard():
             tableString += " <td>" + i['b-rank'] + "</td>"
             tableString += ' </tr> '
         tableString += " </table> <p>"
-	for s in scoresArray:
+        for s in scoresArray:
             tableString += str(s)
-	tableString += "</p>"
+        tableString += "</p>"
         table = Markup(tableString)
         return table
     except Exception as e:
