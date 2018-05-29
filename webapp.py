@@ -76,7 +76,7 @@ def createLeaderboard():
             scoresArray.append(float(score['pp']))
         scoresArray = sorted(scoresArray, reverse=True)
         for i in rankingData.find():
-            tableString += " <tr align='left'> <td><b>" + i['username'] + ":</b> </td>"
+            tableString += " <tr> <td align='left'><b>" + i['username'] + ":</b> </td>"
             tableString += " <td>" + i['gamesPlayed'] + "</td>"
             tableString += " <td>" + i['pp'] + "</td>"
             tableString += " <td>" + i['acc'] + "%</td>"
