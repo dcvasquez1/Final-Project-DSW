@@ -75,18 +75,20 @@ def createLeaderboard():
         for score in rankingData.find():
             scoresArray.append(float(score['pp']))
         scoresArray = sorted(scoresArray, reverse=True)
-        for i in rankingData.find():
-            tableString += ' <tr> <td style="text-align:left"><b>' + i['username'] + ":</b> </td>"
-            tableString += " <td>" + i['gamesPlayed'] + "</td>"
-            tableString += " <td>" + i['pp'] + "</td>"
-            tableString += " <td>" + i['acc'] + "%</td>"
-            tableString += " <td>" + i['s-rank'] + "</td>"
-            tableString += " <td>" + i['a-rank'] + "</td>"
-            tableString += " <td>" + i['b-rank'] + "</td>"
-            tableString += ' </tr> '
-        tableString += " </table> <p>"
+        scoresIndex = 0
+        for i in scoresArray:
+            matchingProfile = rankingData.find_one({'pp': str(i)}
+            tableString += " <tr> <td style='text-align:left'><b>" + matchingProfile['username'] + "</b> </td>"
+            tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
+            tableString += " <td>" + matchingProfile['pp'] + "</td>"
+            tableString += " <td>" + matchingProfile['acc'] + "%</td>"
+            tableString += " <td>" + matchingProfile['s-rank'] + "</td>"
+            tableString += " <td>" + matchingProfile['a-rank'] + "</td>"
+            tableString += " <td>" + matchingProfile['b-rank'] + "</td>"
+            tableString += " </tr> "
+        tableString += " </table> <p>sorted pp:"
         for s in scoresArray:
-            tableString += str(s)
+            tableString += str(s) + "  "
         tableString += "</p>"
         table = Markup(tableString)
         return table
