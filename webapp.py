@@ -53,7 +53,7 @@ def scores_to_html():
         clientData = database["clientData"]
         
         for i in clientData.find():
-            tableString += " <tr> <td><b>" + i['username'] + ":</b> </td>"
+            tableString += " <tr> <td> <b>" + i['username'] + ":</b> </td>"
             tableString += " <td>" + i['score'] + " WPM</td>"
             tableString += " <td> " + i['percentage'] + "%</td>"
             tableString += ' </tr> '
@@ -78,7 +78,7 @@ def createLeaderboard():
         scoresIndex = 0
         for i in scoresArray:
             matchingProfile = rankingData.find_one({'pp': str(i)})
-            tableString += " <tr> <td style='text-align:left'><b>" + matchingProfile['username'] + "</b> </td>"
+            tableString += " <tr> <td style='text-align:left'>#" + str(scoresArray.index(i) + 1) + "  <b>" + matchingProfile['username'] + "</b> </td>"
             tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
             tableString += " <td>" + matchingProfile['pp'] + "</td>"
             tableString += " <td>" + matchingProfile['acc'] + "%</td>"
