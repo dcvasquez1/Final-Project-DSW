@@ -77,7 +77,7 @@ def createLeaderboard():
         scoresArray = sorted(scoresArray, reverse=True)
         scoresIndex = 0
         for i in scoresArray:
-            matchingProfile = rankingData.find_one({'pp': str(i)}
+            matchingProfile = rankingData.find_one({'pp': str(i)})
             tableString += " <tr> <td style='text-align:left'><b>" + matchingProfile['username'] + "</b> </td>"
             tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
             tableString += " <td>" + matchingProfile['pp'] + "</td>"
