@@ -65,7 +65,7 @@ def scores_to_html():
 
 def createLeaderboard():
     try:
-        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th style="text-align:left;padding-right: 100px;"><u> Username </u></th> <th><u> Play Count </u></th> <th><u> Performance </u></th> <th><u> Accuracy </u></th> <th><u> S </u></th> <th><u> A </u></th> <th><u> B </u></th> </tr>'
+        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th style="text-align:left;padding-right: 200px;"><u> Username </u></th> <th><u> Play Count </u></th> <th><u> Performance </u></th> <th><u> Accuracy </u></th> <th><u> S </u></th> <th><u> A </u></th> <th><u> B </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         rankingData = database["rankingData"]
@@ -76,7 +76,7 @@ def createLeaderboard():
             scoresArray.append(float(score['pp']))
         scoresArray = sorted(scoresArray, reverse=True)
         for i in rankingData.find():
-            tableString += " <tr style='text-align:left'> <td><b>" + i['username'] + ":</b> </td>"
+            tableString += " <tr style='text-align:left;'> <td><b>" + i['username'] + ":</b> </td>"
             tableString += " <td>" + i['gamesPlayed'] + "</td>"
             tableString += " <td>" + i['pp'] + "</td>"
             tableString += " <td>" + i['acc'] + "%</td>"
