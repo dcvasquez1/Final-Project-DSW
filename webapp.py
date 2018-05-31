@@ -35,8 +35,6 @@ github = oauth.remote_app(
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
 )
 
-#context processors run before template are rendered and add variable(s) to the template
-#context processors must return a dictionary
 @app.context_processor
 def inject_logged_in():
     return {"logged_in":('github_token' in session)}
@@ -65,7 +63,9 @@ def scores_to_html():
 
 def createLeaderboard():
     try:
-        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th style="text-align:left;padding-right: 300px;"></th> <th><u> Play Count </u></th> <th style="font-size:18px"><u> Performance </u></th> <th style="padding-right:20px; padding-left:20px;"><u> WPM </u></th> <th><u> Accuracy </u></th> <th style="padding-right:20px; padding-left:20px;"><u> S </u></th> <th style="padding-right:20px; padding-left:20px;"><u> A </u></th> <th style="padding-right:20px; padding-left:20px;"><u> B </u></th> </tr>'
+        rankStyle = ' style="padding-right:20px; padding-left:20px;"'
+        userStle = ' style="text-align:left;padding-right: 300px;"'
+        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th' + userStyle + '></th> <th><u> Play Count </u></th> <th' + rankStyle + '><u> S </u></th> <th' + rankStyle + '><u> A </u></th> <th' + rankStyle + '><u> B </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         rankingData = database["rankingData"]
@@ -214,23 +214,24 @@ def submitScore():
     rankString = ""
     rankDictKey = ""
 
+    shorteningString = '_rank"><span style="font-size:200%">Rank: </span><span style="color:'
     if percentageCorrect == 100.0:
-        rankString = '<p id="S_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">S</span></p>'
+        rankString = '<p id="S' + shorteningString + '#f3e502; font-size:500%;">S</span></p>'
         rankDictKey = "s-rank"
     elif percentageCorrect >= 93.5:
-        rankString = '<p id="A_rank"><span style="font-size:200%">Rank: </span><span style="color:#57e54b; font-size:500%;">A</span></p>'
+        rankString = '<p id="A' + shorteningString + '#57e54b; font-size:500%;">A</span></p>'
         rankDictKey = "a-rank"
     elif percentageCorrect >= 81.0:
-        rankString = '<p id="B_rank"><span style="font-size:200%">Rank: </span><span style="color:#007ff2; font-size:500%;">B</span></p>'
+        rankString = '<p id="B' + shorteningString + '#007ff2; font-size:500%;">B</span></p>'
         rankDictKey = "b-rank"
     elif percentageCorrect >= 70.0:
-        rankString = '<p id="C_rank"><span style="font-size:200%">Rank: </span><span style="color:#f667d6; font-size:500%;">C</span></p>'
+        rankString = '<p id="C' + shorteningString + '#f667d6; font-size:500%;">C</span></p>'
         rankDictKey = "c-rank"
     elif percentageCorrect >= 60.0:
-        rankString = '<p id="D_rank"><span style="font-size:200%">Rank: </span><span style="color:#ff4700; font-size:500%;">D</span></p>'
+        rankString = '<p id="D' + shorteningString + '#ff4700; font-size:500%;">D</span></p>'
         rankDictKey = "d-rank"
     else: 
-        rankString = '<p id="F_rank"><span style="font-size:200%">Rank: </span><span style="color:#ff0000; font-size:500%;">F</span></p>'
+        rankString = '<p id="F' + shorteningString + '#ff0000; font-size:500%;">F</span></p>'
         rankDictKey = "f-rank"
 
     scoresList = []
@@ -241,19 +242,32 @@ def submitScore():
     total_userPP = 0
     for index, score in scoresList:
         total_userPP += score * (0.8^index)
-
-    if rankedScores.find_one({"username": username}) != None:
-        
-    else:
-        
+    total_userPP = round(total_userPP, 2)
     
     try:
+        user = {}
+        if rankedScores.find_one({ "username": username }) == None:
+            user = buildRankedProfile()
+        else:
+            user = rankedScores.find_one({ "username": username })
+        user["username"] = username
+        user["wpm"] = str( (float(user["wpm"]) * int(user["gamesPlayed"]) + rawWPM) / int(user['gamesPlayed'] + 1) )
+        user["acc"] = str( (float(user["acc"]) * int(user["gamesPlayed"]) + rawAcc) / int(user['gamesPlayed'] + 1) )
+        user["pp"] = str(total_userPP)
+        user["gamesPlayed"] = str(int(user["gamesPlayed"]) + 1)
+        user[rankDictKey] = str( int(user[rankDictKey] + 1) )
+        
+        if rankedScores.find_one({ "username": username }) == None:
+            rankedScores.find_one_and_replace({ "username": username }, user)
+        else:
+            rankedScores.insert_one(user)
+        
         clientScores.insert_one( { 'username': username, 'score': str(userWPM), 'rawPP': str(rawPP), 'percentage': str(percentageCorrect) } )
         return Markup(rankString + '<p><b>Unweighted PP: </b>' str(roundedPP) + 'pp</p> <p><b>You Typed:</b> ' + clientTypedString + '</p> <p><b>Original Text:</b> ' + templateString + '</p> <p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p> <p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p> <p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
     except:
         return Markup(rankString + '<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p><br><p><b>**LOGIN TO SAVE SCORES**</b></p>')
 
-       
+     
 def buildRankedProfile():
     return { "username": "SAMPLE-USERNAME", "pp": "0", "wpm": "0", "acc": "0", "gamesPlayed": "1", "s-rank": "0", "a-rank": "0", "b-rank": "0", "c-rank": "0", "d-rank": "0", "f-rank": "0" }
 
