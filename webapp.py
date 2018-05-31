@@ -65,7 +65,7 @@ def scores_to_html():
 
 def createLeaderboard():
     try:
-        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th style="text-align:left;padding-right: 300px;"></th> <th><u> Play Count </u></th> <th><u> Performance </u></th> <th><u> WPM </u></th> <th><u> Accuracy </u></th> <th style="padding-right:14px; padding-left:14px;"><u> S </u></th> <th style="padding-right:14px; padding-left:14px;"><u> A </u></th> <th style="padding-right:14px; padding-left:14px;"><u> B </u></th> </tr>'
+        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th style="text-align:left;padding-right: 300px;"></th> <th><u> Play Count </u></th> <th style="font-size:18px"><u> Performance </u></th> <th><u> WPM </u></th> <th><u> Accuracy </u></th> <th style="padding-right:20px; padding-left:20px;"><u> S </u></th> <th style="padding-right:20px; padding-left:20px;"><u> A </u></th> <th style="padding-right:20px; padding-left:20px;"><u> B </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         rankingData = database["rankingData"]
