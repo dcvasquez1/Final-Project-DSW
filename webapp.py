@@ -263,7 +263,7 @@ def submitScore():
             rankedScores.insert_one(user)
         
         clientScores.insert_one( { 'username': username, 'score': str(userWPM), 'rawPP': str(rawPP), 'percentage': str(percentageCorrect) } )
-        return Markup(rankString + '<p><b>Unweighted PP: </b>' str(roundedPP) + 'pp</p> <p><b>You Typed:</b> ' + clientTypedString + '</p> <p><b>Original Text:</b> ' + templateString + '</p> <p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p> <p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p> <p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
+        return Markup(rankString + '<p><b>Unweighted PP: </b>' + str(roundedPP) + 'pp</p> <p><b>You Typed:</b> ' + clientTypedString + '</p> <p><b>Original Text:</b> ' + templateString + '</p> <p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p> <p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p> <p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
     except:
         return Markup(rankString + '<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p><br><p><b>**LOGIN TO SAVE SCORES**</b></p>')
 
