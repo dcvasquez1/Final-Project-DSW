@@ -81,7 +81,7 @@ def createLeaderboard():
             tableString += " <tr> <td style='text-align:left'>#" + str(scoresArray.index(i) + 1) + "&ensp; <b>" + matchingProfile['username'] + "</b> </td>"
             tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
             tableString += " <td>" + matchingProfile['pp'] + "</td>"
-            tableString ++ " <td>" + matchingProfile['wpm'] + "</td>"
+            tableString += " <td>" + matchingProfile['wpm'] + "</td>"
             tableString += " <td>" + matchingProfile['acc'] + "%</td>"
             tableString += " <td>" + matchingProfile['s-rank'] + "</td>"
             tableString += " <td>" + matchingProfile['a-rank'] + "</td>"
