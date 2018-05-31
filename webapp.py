@@ -95,7 +95,7 @@ def createLeaderboard():
         return table
     except Exception as e:
         return Markup('<p>' + str(e) + '</p>')
-
+'''
 @app.route('/postedScore', methods=['POST'])
 def postScore():
     try:
@@ -108,7 +108,7 @@ def postScore():
         return render_template('scoreboard.html', scoreboard_table=scores_to_html())
     except Exception as e:
         return render_template('scoreboard.html', scoreboard_table=Markup('<p>' + str(e) + '</p>'))
-
+'''
 def findAvg():
     try:
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
@@ -181,7 +181,7 @@ def findNum():
         return Markup("<p> Unable to find user data </p>")
 
 @app.route('/showScore', methods=['POST'])
-def showScore():
+def submitScore():
     clientTypedString = request.form["typed_text"]
     templateString = request.form["original_text"]
     timeInMilliseconds = request.form["typing_time"]
@@ -196,35 +196,67 @@ def showScore():
         if i < len(typedArray):
             if templateWord == typedArray[i]:
                 correctWords += 1
+
     percentageCorrect = round(float((correctWords)/(len(templateArray))) * 100, 2)
-    
     userWPM = round((correctWords)/(timeInMinutes), 1)
+
+    rawAcc = float((correctWords)/(len(templateArray)))
+    rawWPM = (correctWords)/(timeInMinutes)
+
+    rawPP = (rawAcc^7)*rawWPM
+    roundedPP = round(rawPP, 2)
 
     client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
     database = client["dsw-final-project"]
+    username = session['user_data']['login']
     clientScores = database["clientData"]
+    rankedScores = database["rankingData"]
     rankString = ""
+    rankDictKey = ""
 
     if percentageCorrect == 100.0:
         rankString = '<p id="S_rank"><span style="font-size:200%">Rank: </span><span style="color:#f3e502; font-size:500%;">S</span></p>'
+        rankDictKey = "s-rank"
     elif percentageCorrect >= 93.5:
         rankString = '<p id="A_rank"><span style="font-size:200%">Rank: </span><span style="color:#57e54b; font-size:500%;">A</span></p>'
-    elif percentageCorrect >= 82.5:
+        rankDictKey = "a-rank"
+    elif percentageCorrect >= 81.0:
         rankString = '<p id="B_rank"><span style="font-size:200%">Rank: </span><span style="color:#007ff2; font-size:500%;">B</span></p>'
+        rankDictKey = "b-rank"
     elif percentageCorrect >= 70.0:
         rankString = '<p id="C_rank"><span style="font-size:200%">Rank: </span><span style="color:#f667d6; font-size:500%;">C</span></p>'
+        rankDictKey = "c-rank"
     elif percentageCorrect >= 60.0:
         rankString = '<p id="D_rank"><span style="font-size:200%">Rank: </span><span style="color:#ff4700; font-size:500%;">D</span></p>'
+        rankDictKey = "d-rank"
     else: 
         rankString = '<p id="F_rank"><span style="font-size:200%">Rank: </span><span style="color:#ff0000; font-size:500%;">F</span></p>'
+        rankDictKey = "f-rank"
 
+    scoresList = []
+    for score in clientScores.find({'username': username}):
+        scoresList.append(score['rawPP'])
+
+    scoresList = sorted(scoresList, reverse=True)
+    total_userPP = 0
+    for index, score in scoresList:
+        total_userPP += score * (0.8^index)
+
+    if rankedScores.find_one({"username": username}) != None:
+        
+    else:
+        
+    
     try:
-        clientScores.insert_one( { 'username': session['user_data']['login'], 'score': str(userWPM), 'percentage': str(percentageCorrect) } )
-        return Markup(rankString + '<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
+        clientScores.insert_one( { 'username': username, 'score': str(userWPM), 'rawPP': str(rawPP), 'percentage': str(percentageCorrect) } )
+        return Markup(rankString + '<p><b>Unweighted PP: </b>' str(roundedPP) + 'pp</p> <p><b>You Typed:</b> ' + clientTypedString + '</p> <p><b>Original Text:</b> ' + templateString + '</p> <p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p> <p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p> <p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p>')
     except:
         return Markup(rankString + '<p><b>You Typed:</b> ' + clientTypedString + '</p><p><b>Original Text:</b> ' + templateString + '</p><p><b>Percentage Correct:</b> ' + str(percentageCorrect) + '% </p><p><b>Typing Time:</b> ' + str(timeInSeconds) + ' seconds</p><p><b>Typing Speed:</b> ' + str(userWPM) + ' WPM</p><br><p><b>**LOGIN TO SAVE SCORES**</b></p>')
 
        
+def buildRankedProfile():
+    return { "username": "SAMPLE-USERNAME", "pp": "0", "wpm": "0", "acc": "0", "gamesPlayed": "1", "s-rank": "0", "a-rank": "0", "b-rank": "0", "c-rank": "0", "d-rank": "0", "f-rank": "0" }
+
 #redirect to GitHub's OAuth page and confirm the callback URL
 @app.route('/login')
 def login():
