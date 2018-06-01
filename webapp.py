@@ -53,7 +53,7 @@ def scores_to_html():
         clientData = database["clientData"]
         scoresArray = []
         
-        for score in rankingData.find():
+        for score in clientData.find():
             scoresArray.append(float(score['rawPP']))
         scoresArray = sorted(scoresArray, reverse=True)
 
@@ -87,7 +87,7 @@ def createLeaderboard():
         scoresArray = sorted(scoresArray, reverse=True)
 
         for score in scoresArray:
-            for matchingProfile in rankingData.find({'pp': str(i)}):
+            for matchingProfile in rankingData.find({'pp': str(score)}):
                 tableString += " <tr> <td style='text-align:left'>#" + str(scoresArray.index(score) + 1) + "&ensp; <b>" + matchingProfile['username'] + "</b> </td>"
                 tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
                 tableString += " <td>" + matchingProfile['pp'] + "</td>"
