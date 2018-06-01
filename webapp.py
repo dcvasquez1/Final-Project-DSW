@@ -47,7 +47,8 @@ def scores_to_html():
     try:
         userStyle = ' style="text-align:left;padding-right: 300px;"'
         scoreStyle = ' style="padding-right:30px; padding-left:30px;"'
-        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th' + userStyle + '><u> Username </u></th> <th><u> Performance </u></th><th' + scoreStyle + '><u> WPM </u></th> <th><u> Accuracy </u></th> </tr>'
+	rankStyle = ' style="padding-right:10px; padding-left:10px;"'
+        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th' + rankStyle + '></th> <th' + userStyle + '></th> <th><u> Performance </u></th><th' + scoreStyle + '><u> WPM </u></th> <th><u> Accuracy </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         clientData = database["clientData"]
@@ -59,7 +60,8 @@ def scores_to_html():
 
         for score in scoresArray:
             for user in clientData.find({"rawPP": str(score)}):
-                tableString += " <tr> <td style='text-align:left'>#" + str(scoresArray.index(score) + 1) + "<b>" + user['username'] + ":</b> </td>"
+                tableString += " <tr> <td>#" + str(scoresArray.index(score) + 1) + " </td>"
+		tableString += " <td style='text-align:left'>#" +  + "<b>" + user['username'] + ":</b> </td>"
                 tableString += " <td> " + str(round(score, 2)) + " </td>"
                 tableString += " <td>" + user['score'] + "</td>"
                 tableString += " <td> " + user['percentage'] + "%</td>"
