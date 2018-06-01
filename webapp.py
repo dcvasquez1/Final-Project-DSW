@@ -61,9 +61,9 @@ def scores_to_html():
         for score in scoresArray:
             for user in clientData.find({"rawPP": str(score)}):
                 tableString += " <tr> <td>#" + str(scoresArray.index(score) + 1) + " </td>"
-                tableString += " <td style='text-align:left'>#" +  + "<b>" + user['username'] + ":</b> </td>"
+                tableString += " <td style='text-align:left'><b>" + user['username'] + ":</b> </td>"
                 tableString += " <td> " + str(round(score, 2)) + " </td>"
-                tableString += " <td>" + user['score'] + "</td>"
+                tableString += " <td> " + user['score'] + "</td>"
                 tableString += " <td> " + user['percentage'] + "%</td>"
                 tableString += ' </tr> '
         tableString += " </table>"
