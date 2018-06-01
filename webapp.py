@@ -45,7 +45,9 @@ def home():
 
 def scores_to_html():
     try:
-        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th><u> Username </u></th> <th><u> Score </u></th> <th><u> Accuracy </u></th> </tr>'
+        userStyle = ' style="text-align:left;padding-right: 300px;"'
+        scoreStyle = ' style="padding-right:30px; padding-left:30px;"'
+        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th' + userStyle + '><u> Username </u></th> <th' + scoreStyle + '><u> Score </u></th> <th><u> Accuracy </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         clientData = database["clientData"]
