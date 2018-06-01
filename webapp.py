@@ -47,16 +47,23 @@ def scores_to_html():
     try:
         userStyle = ' style="text-align:left;padding-right: 300px;"'
         scoreStyle = ' style="padding-right:30px; padding-left:30px;"'
-        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th' + userStyle + '><u> Username </u></th> <th' + scoreStyle + '><u> Score </u></th> <th><u> Accuracy </u></th> </tr>'
+        tableString = '<table id="scoreTable" cellpadding="5"> <tr> <th' + userStyle + '><u> Username </u></th> <th><u> Performance </u></th><th' + scoreStyle + '><u> Score </u></th> <th><u> Accuracy </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         clientData = database["clientData"]
+        scoresArray = []
         
-        for i in clientData.find():
-            tableString += " <tr> <td> <b>" + i['username'] + ":</b> </td>"
-            tableString += " <td>" + i['score'] + " WPM</td>"
-            tableString += " <td> " + i['percentage'] + "%</td>"
-            tableString += ' </tr> '
+        for score in rankingData.find():
+            scoresArray.append(float(score['rawPP']))
+        scoresArray = sorted(scoresArray, reverse=True)
+
+        for score in scoresArray:
+            for user in clientData.find({"rawPP": str(score)}):
+                tableString += " <tr> <td style='text-align:left'>#" + str(scoresArray.index(score) + 1) + "<b>" + user['username'] + ":</b> </td>"
+                tableString += " <tr> <td> <b>" + str(round(score, 2)) + ":</b> </td>"
+                tableString += " <td>" + user['score'] + " WPM</td>"
+                tableString += " <td> " + user['percentage'] + "%</td>"
+                tableString += ' </tr> '
         tableString += " </table>"
         table = Markup(tableString)
         return table
@@ -78,40 +85,25 @@ def createLeaderboard():
         for score in rankingData.find():
             scoresArray.append(float(score['pp']))
         scoresArray = sorted(scoresArray, reverse=True)
-        scoresIndex = 0
-        for i in scoresArray:
-            matchingProfile = rankingData.find_one({'pp': str(i)})
-            tableString += " <tr> <td style='text-align:left'>#" + str(scoresArray.index(i) + 1) + "&ensp; <b>" + matchingProfile['username'] + "</b> </td>"
-            tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
-            tableString += " <td>" + matchingProfile['pp'] + "</td>"
-            tableString += " <td>" + matchingProfile['wpm'] + "</td>"
-            tableString += " <td>" + matchingProfile['acc'] + "%</td>"
-            tableString += " <td>" + matchingProfile['s-rank'] + "</td>"
-            tableString += " <td>" + matchingProfile['a-rank'] + "</td>"
-            tableString += " <td>" + matchingProfile['b-rank'] + "</td>"
-            tableString += " </tr> "
-        tableString += " </table> <p>sorted pp:"
-        for s in scoresArray:
-            tableString += str(s) + "  "
-        tableString += "</p>"
+
+        for score in scoresArray:
+            for matchingProfile in rankingData.find({'pp': str(i)}):
+                tableString += " <tr> <td style='text-align:left'>#" + str(scoresArray.index(score) + 1) + "&ensp; <b>" + matchingProfile['username'] + "</b> </td>"
+                tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
+                tableString += " <td>" + matchingProfile['pp'] + "</td>"
+                tableString += " <td>" + matchingProfile['wpm'] + "</td>"
+                tableString += " <td>" + matchingProfile['acc'] + "%</td>"
+                tableString += " <td>" + matchingProfile['s-rank'] + "</td>"
+                tableString += " <td>" + matchingProfile['a-rank'] + "</td>"
+                tableString += " <td>" + matchingProfile['b-rank'] + "</td>"
+                tableString += " </tr> "
+        tableString += " </table>"
+        
         table = Markup(tableString)
         return table
     except Exception as e:
         return Markup('<p>' + str(e) + '</p>')
-'''
-@app.route('/postedScore', methods=['POST'])
-def postScore():
-    try:
-        client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
-        database = client["dsw-final-project"]
-        clientData = database["clientData"]
-        username = session['user_data']['login']
-        score = request.form['score']
-        clientData.insert_one({'username': username, 'score': score})
-        return render_template('scoreboard.html', scoreboard_table=scores_to_html())
-    except Exception as e:
-        return render_template('scoreboard.html', scoreboard_table=Markup('<p>' + str(e) + '</p>'))
-'''
+
 def findAvg():
     try:
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
