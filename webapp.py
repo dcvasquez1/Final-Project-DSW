@@ -65,7 +65,7 @@ def createLeaderboard():
     try:
         rankStyle = ' style="padding-right:20px; padding-left:20px;"'
         userStyle = ' style="text-align:left;padding-right: 300px;"'
-        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th' + userStyle + '></th> <th><u> Play Count </u></th> <th' + rankStyle + '><u> S </u></th> <th' + rankStyle + '><u> A </u></th> <th' + rankStyle + '><u> B </u></th> </tr>'
+        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th' + userStyle + '></th> <th><u> Play Count </u></th> <th><u> Performance </u></th><th><u> WPM </u></th><th><u> Accuracy </u></th><th' + rankStyle + '><u> S </u></th> <th' + rankStyle + '><u> A </u></th> <th' + rankStyle + '><u> B </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         rankingData = database["rankingData"]
