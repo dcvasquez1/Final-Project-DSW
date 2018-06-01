@@ -77,7 +77,8 @@ def createLeaderboard():
         rankStyle = ' style="padding-right:20px; padding-left:20px;"'
         userStyle = ' style="text-align:left;padding-right: 300px;"'
         wpmStyle = ' style="padding-right:12px; padding-left:12px;"'
-        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th' + userStyle + '></th> <th><u> Play Count </u></th> <th><u> Performance </u></th> <th ' + wpmStyle + '><u> WPM </u></th> <th><u> Accuracy </u></th><th' + rankStyle + '><u> S </u></th> <th' + rankStyle + '><u> A </u></th> <th' + rankStyle + '><u> B </u></th> </tr>'
+        rankNumStyle = ' style="padding-right:10px; padding-left:10px;"'
+        tableString = '<table id="rankingTable" cellpadding="5"> <tr> <th' + rankNumStyle + '></th> <th' + userStyle + '></th> <th><u> Play Count </u></th> <th><u> Performance </u></th> <th ' + wpmStyle + '><u> WPM </u></th> <th><u> Accuracy </u></th><th' + rankStyle + '><u> S </u></th> <th' + rankStyle + '><u> A </u></th> <th' + rankStyle + '><u> B </u></th> </tr>'
         client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
         database = client["dsw-final-project"]
         rankingData = database["rankingData"]
@@ -90,7 +91,8 @@ def createLeaderboard():
 
         for score in scoresArray:
             for matchingProfile in rankingData.find({'pp': str(score)}):
-                tableString += " <tr> <td style='text-align:left'>#" + str(scoresArray.index(score) + 1) + "&ensp; <b>" + matchingProfile['username'] + "</b> </td>"
+		tableString += " <tr> <td>" + str(scoresArray.index(score) + 1) + "</td>"
+                tableString += " <tr> <td style='text-align:left'><b>" + matchingProfile['username'] + "</b> </td>"
                 tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
                 tableString += " <td>" + matchingProfile['pp'] + "</td>"
                 tableString += " <td>" + matchingProfile['wpm'] + "</td>"
