@@ -202,7 +202,7 @@ def submitScore():
     rawAcc = float((correctWords)/(len(templateArray)))
     rawWPM = (correctWords)/(timeInMinutes)
 
-    rawPP = (rawAcc^7)*rawWPM
+    rawPP = (rawAcc**7)*rawWPM
     roundedPP = round(rawPP, 2)
 
     client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
@@ -240,7 +240,7 @@ def submitScore():
     scoresList = sorted(scoresList, reverse=True)
     total_userPP = 0
     for index, score in scoresList:
-        total_userPP += score * (0.8^index)
+        total_userPP += score * (0.8**index)
     total_userPP = round(total_userPP, 2)
     
     try:
