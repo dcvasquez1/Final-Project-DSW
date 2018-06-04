@@ -86,7 +86,7 @@ def createLeaderboard():
         scoresArray = []
         
         for score in rankingData.find():
-            scoresArray.append(float(score['pp']))
+            scoresArray.append(round(float(score['pp']), 1))
         scoresArray = sorted(scoresArray, reverse=True)
 
         for score in scoresArray:
