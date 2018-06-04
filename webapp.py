@@ -248,6 +248,12 @@ def submitScore():
         user = {}
         if rankedScores.find_one({ "username": username }) == None:
             user = buildRankedProfile()
+            user["username"] = username
+            user["wpm"] = str(rawWPM)
+            user["acc"] = str(rawAcc*100)
+            user["pp"] = str(rawPP)
+            user["gamesPlayed"] = str(1)
+            user[rankDictKey] = str(1)
         else:
             user = rankedScores.find_one({ "username": username })
             user["username"] = username
