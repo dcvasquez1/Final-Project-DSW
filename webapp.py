@@ -239,7 +239,7 @@ def submitScore():
         for score in clientScores.find({'username': username}):
             scoresList.append(score['rawPP'])
 
-        scoresList = sorted(scoresList, reverse=True)
+        scoresList = sorted(scoresList, key=float, reverse=True)
         total_userPP = 0
         for index, score in enumerate(scoresList):
             total_userPP += float(score) * (0.8**index)
@@ -250,12 +250,12 @@ def submitScore():
             user = buildRankedProfile()
         else:
             user = rankedScores.find_one({ "username": username })
-        user["username"] = username
-        user["wpm"] = str( (float(user["wpm"]) * int(user["gamesPlayed"]) + rawWPM) / (int(user['gamesPlayed']) + 1) )
-        user["acc"] = str( (float(user["acc"]) * int(user["gamesPlayed"]) + rawAcc*100) / (int(user['gamesPlayed'])+ 1) )
-        user["pp"] = str(total_userPP)
-        user["gamesPlayed"] = str(int(user["gamesPlayed"]) + 1)
-        user[rankDictKey] = str(int(user[rankDictKey]) + 1)
+            user["username"] = username
+            user["wpm"] = str( (float(user["wpm"]) * int(user["gamesPlayed"]) + rawWPM) / (int(user['gamesPlayed']) + 1) )
+            user["acc"] = str( (float(user["acc"]) * int(user["gamesPlayed"]) + rawAcc*100) / (int(user['gamesPlayed'])+ 1) )
+            user["pp"] = str(total_userPP)
+            user["gamesPlayed"] = str(int(user["gamesPlayed"]) + 1)
+            user[rankDictKey] = str(int(user[rankDictKey]) + 1)
         
         if rankedScores.find_one({ "username": username }) != None:
             rankedScores.find_one_and_replace({ "username": username }, user)
