@@ -56,7 +56,7 @@ def scores_to_html():
         
         for score in clientData.find():
             scoresArray.append(score['rawPP'])
-        scoresArray = sorted(scoresArray, reverse=True)
+        scoresArray = sorted(scoresArray, key=float, reverse=True)
 
         for score in scoresArray:
             for user in clientData.find({"rawPP": score}):
@@ -87,7 +87,7 @@ def createLeaderboard():
         
         for score in rankingData.find():
             scoresArray.append(score['pp'])
-        scoresArray = sorted(scoresArray, reverse=True)
+        scoresArray = sorted(scoresArray, key=float, reverse=True)
 
         for score in scoresArray:
             for matchingProfile in rankingData.find({'pp': score}):
