@@ -62,9 +62,9 @@ def scores_to_html():
             for user in clientData.find({"rawPP": score}):
                 tableString += " <tr> <td>#" + str(scoresArray.index(score) + 1) + " </td>"
                 tableString += " <td style='text-align:left'><b>" + user['username'] + ":</b> </td>"
-                tableString += " <td> " + str(round(float(score), 2)) + " </td>"
-                tableString += " <td> " + user['score'] + "</td>"
-                tableString += " <td> " + user['percentage'] + "%</td>"
+                tableString += " <td> " + str(round(float(score), 1)) + " </td>"
+                tableString += " <td> " + str(round(float(user['score']), 1)) + "</td>"
+                tableString += " <td> " + str(round(float(user['percentage']), 1)) + "%</td>"
                 tableString += ' </tr> '
         tableString += " </table>"
         table = Markup(tableString)
@@ -94,9 +94,9 @@ def createLeaderboard():
                 tableString += " <tr> <td>#" + str(scoresArray.index(score) + 1) + "</td>"
                 tableString += " <td style='text-align:left'><b>" + matchingProfile['username'] + "</b> </td>"
                 tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
-                tableString += " <td>" + matchingProfile['pp'] + "</td>"
+                tableString += " <td>" + str(round(float(matchingProfile['pp']), 1)) + "</td>"
                 tableString += " <td>" + str(round(float(matchingProfile['wpm']), 1)) + "</td>"
-                tableString += " <td>" + matchingProfile['acc'] + "%</td>"
+                tableString += " <td>" + str(round(float(matchingProfile['acc']), 1)) + "%</td>"
                 tableString += " <td>" + matchingProfile['s-rank'] + "</td>"
                 tableString += " <td>" + matchingProfile['a-rank'] + "</td>"
                 tableString += " <td>" + matchingProfile['b-rank'] + "</td>"
