@@ -237,12 +237,12 @@ def submitScore():
         username = session['user_data']['login']
         scoresList = []
         for score in clientScores.find({'username': username}):
-            scoresList.append(float(score['rawPP']))
+            scoresList.append(score['rawPP'])
 
         scoresList = sorted(scoresList, reverse=True)
         total_userPP = 0
         for index, score in scoresList:
-            total_userPP += score * (0.8**index)
+            total_userPP += float(score) * (0.8**index)
         total_userPP = round(total_userPP, 2)
 
         user = {}
