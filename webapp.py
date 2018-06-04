@@ -241,7 +241,7 @@ def submitScore():
 
         scoresList = sorted(scoresList, reverse=True)
         total_userPP = 0
-        for index, score in scoresList:
+        for index, score in enumerate(scoresList):
             total_userPP += float(score) * (0.8**index)
         total_userPP = round(total_userPP, 2)
 
