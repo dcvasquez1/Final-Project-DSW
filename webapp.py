@@ -91,8 +91,8 @@ def createLeaderboard():
 
         for score in scoresArray:
             for matchingProfile in rankingData.find({'pp': str(score)}):
-                tableString += " <tr> <td>" + str(scoresArray.index(score) + 1) + "</td>"
-                tableString += " <tr> <td style='text-align:left'><b>" + matchingProfile['username'] + "</b> </td>"
+                tableString += " <tr> <td>#" + str(scoresArray.index(score) + 1) + "</td>"
+                tableString += " <td style='text-align:left'><b>" + matchingProfile['username'] + "</b> </td>"
                 tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
                 tableString += " <td>" + matchingProfile['pp'] + "</td>"
                 tableString += " <td>" + matchingProfile['wpm'] + "</td>"
