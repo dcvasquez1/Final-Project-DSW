@@ -257,7 +257,7 @@ def submitScore():
         user["gamesPlayed"] = str(int(user["gamesPlayed"]) + 1)
         user[rankDictKey] = str(int(user[rankDictKey]) + 1)
         
-        if rankedScores.find_one({ "username": username }) == None:
+        if rankedScores.find_one({ "username": username }) != None:
             rankedScores.find_one_and_replace({ "username": username }, user)
         else:
             rankedScores.insert_one(user)
