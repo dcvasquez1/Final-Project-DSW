@@ -207,7 +207,7 @@ def submitScore():
 
     client = pymongo.MongoClient("mongodb://test_user:18s9h64735f124g5e68@ds247449.mlab.com:47449/dsw-final-project")
     database = client["dsw-final-project"]
-    username = session['user_data']['login']
+
     clientScores = database["clientData"]
     rankedScores = database["rankingData"]
     rankString = ""
@@ -232,18 +232,19 @@ def submitScore():
     else: 
         rankString = '<p id="F' + shorteningString + '#ff0000; font-size:500%;">F</span></p>'
         rankDictKey = "f-rank"
-
-    scoresList = []
-    for score in clientScores.find({'username': username}):
-        scoresList.append(score['rawPP'])
-
-    scoresList = sorted(scoresList, reverse=True)
-    total_userPP = 0
-    for index, score in scoresList:
-        total_userPP += score * (0.8**index)
-    total_userPP = round(total_userPP, 2)
     
     try:
+        username = session['user_data']['login']
+        scoresList = []
+        for score in clientScores.find({'username': username}):
+            scoresList.append(score['rawPP'])
+
+        scoresList = sorted(scoresList, reverse=True)
+        total_userPP = 0
+        for index, score in scoresList:
+            total_userPP += score * (0.8**index)
+        total_userPP = round(total_userPP, 2)
+
         user = {}
         if rankedScores.find_one({ "username": username }) == None:
             user = buildRankedProfile()
