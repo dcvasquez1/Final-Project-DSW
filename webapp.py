@@ -95,7 +95,7 @@ def createLeaderboard():
                 tableString += " <td style='text-align:left'><b>" + matchingProfile['username'] + "</b> </td>"
                 tableString += " <td>" + matchingProfile['gamesPlayed'] + "</td>"
                 tableString += " <td>" + matchingProfile['pp'] + "</td>"
-                tableString += " <td>" + matchingProfile['wpm'] + "</td>"
+                tableString += " <td>" + str(round(float(matchingProfile['wpm']), 1)) + "</td>"
                 tableString += " <td>" + matchingProfile['acc'] + "%</td>"
                 tableString += " <td>" + matchingProfile['s-rank'] + "</td>"
                 tableString += " <td>" + matchingProfile['a-rank'] + "</td>"
