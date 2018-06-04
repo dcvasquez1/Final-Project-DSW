@@ -55,14 +55,14 @@ def scores_to_html():
         scoresArray = []
         
         for score in clientData.find():
-            scoresArray.append(float(score['rawPP']))
+            scoresArray.append(score['rawPP'])
         scoresArray = sorted(scoresArray, reverse=True)
 
         for score in scoresArray:
-            for user in clientData.find({"rawPP": str(score)}):
+            for user in clientData.find({"rawPP": score}):
                 tableString += " <tr> <td>#" + str(scoresArray.index(score) + 1) + " </td>"
                 tableString += " <td style='text-align:left'><b>" + user['username'] + ":</b> </td>"
-                tableString += " <td> " + str(round(score, 2)) + " </td>"
+                tableString += " <td> " + str(round(float(score), 2)) + " </td>"
                 tableString += " <td> " + user['score'] + "</td>"
                 tableString += " <td> " + user['percentage'] + "%</td>"
                 tableString += ' </tr> '
@@ -86,7 +86,7 @@ def createLeaderboard():
         scoresArray = []
         
         for score in rankingData.find():
-            scoresArray.append(round(float(score['pp']), 1))
+            scoresArray.append(score['pp'])
         scoresArray = sorted(scoresArray, reverse=True)
 
         for score in scoresArray:
